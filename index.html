@@ -4,186 +4,146 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chapter 12 · Money</title>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Grandstander:wght@500;600;700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--amber:#B45309;--gold:#D97706;--gold2:#F59E0B;--cream:#FFFBEB;--green:#16A34A;--red:#DC2626;--brown:#78350F;--sand:#FEF9C3;--stripe1:#B45309;--stripe2:#F59E0B}
-html,body{width:100%;min-height:100vh}
-body{font-family:'Nunito',sans-serif;background:linear-gradient(180deg,#78350F 0%,#B45309 30%,#D97706 70%,#FDE68A 100%);min-height:100vh;padding:0 0 32px;display:flex;flex-direction:column;align-items:center;}
-
-/* market awning */
-.awning{width:100%;height:52px;background:repeating-linear-gradient(90deg,var(--stripe1) 0,var(--stripe1) 36px,var(--stripe2) 36px,var(--stripe2) 72px);position:relative}
-.awning::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:18px;background:repeating-linear-gradient(90deg,var(--stripe1) 0,var(--stripe1) 36px,var(--stripe2) 36px,var(--stripe2) 72px);clip-path:polygon(0 0,2% 100%,4% 0,6% 100%,8% 0,10% 100%,12% 0,14% 100%,16% 0,18% 100%,20% 0,22% 100%,24% 0,26% 100%,28% 0,30% 100%,32% 0,34% 100%,36% 0,38% 100%,40% 0,42% 100%,44% 0,46% 100%,48% 0,50% 100%,52% 0,54% 100%,56% 0,58% 100%,60% 0,62% 100%,64% 0,66% 100%,68% 0,70% 100%,72% 0,74% 100%,76% 0,78% 100%,80% 0,82% 100%,84% 0,86% 100%,88% 0,90% 100%,92% 0,94% 100%,96% 0,98% 100%,100% 0)}
-.mkt-header{width:100%;background:var(--amber);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid var(--brown)}
-.mh-title{font-family:'Fredoka One',cursive;font-size:26px;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.2)}
-.mh-chip{background:var(--sand);color:var(--brown);font-size:12px;font-weight:900;padding:5px 14px;border-radius:20px;border:2px solid var(--gold2)}
-
-.page{width:100%;max-width:700px;padding:16px;display:flex;flex-direction:column;gap:20px}
-.mcard{background:var(--cream);border-radius:24px;padding:20px;box-shadow:0 6px 0 rgba(0,0,0,.15),0 2px 16px rgba(0,0,0,.1);border:3px solid rgba(255,255,255,.9);position:relative;overflow:hidden}
-.mcard::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;border-radius:24px 24px 0 0}
-.mcard.gold::before{background:var(--gold)}.mcard.amber::before{background:var(--amber)}.mcard.green::before{background:var(--green)}
-.mc-title{font-family:'Fredoka One',cursive;font-size:20px;color:var(--brown);margin-bottom:4px}
-.hint{font-size:13px;font-weight:700;color:var(--amber);margin-bottom:14px;line-height:1.5}
-
-/* palette */
-.palette{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
-.coin-btn{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;background:none;border:none;transition:transform .15s;padding:2px}
-.coin-btn:hover{transform:scale(1.14)}
-.coin-btn:active{transform:scale(.94)}
-.coin-name{font-size:11px;font-weight:800;color:var(--amber)}
-
-/* wallet */
-.wallet-zone{min-height:80px;background:var(--sand);border-radius:16px;padding:12px;border:2.5px solid var(--gold2);display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:10px}
-.w-ph{font-size:13px;color:var(--gold);font-weight:700}
-.w-item{display:inline-flex;cursor:pointer;transition:transform .12s;position:relative}
-.w-item:hover{transform:scale(1.16)}
-.remove-dot{position:absolute;top:-4px;right:-4px;width:14px;height:14px;background:var(--red);color:#fff;border-radius:50%;font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s;pointer-events:none}
-.w-item:hover .remove-dot{opacity:1}
-.total-row{display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
-.total-big{font-family:'Fredoka One',cursive;font-size:60px;color:var(--brown);line-height:1}
-.clr-btn{background:#fff;border:2.5px solid var(--gold2);color:var(--amber);font-family:'Fredoka One',cursive;font-size:14px;padding:8px 18px;border-radius:12px;cursor:pointer}
-
-/* shop */
-.shop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:8px;margin-bottom:14px}
-.shop-item{background:var(--sand);border-radius:14px;padding:10px 8px;text-align:center;border:2.5px solid var(--gold2);cursor:pointer;transition:all .16s}
-.shop-item:hover{border-color:var(--amber);transform:scale(1.04)}
-.shop-item.sel{border-color:var(--brown);background:#FDE68A;border-width:3px;transform:scale(1.04)}
-.si-em{font-size:28px;margin-bottom:4px}
-.si-name{font-size:12px;font-weight:800;color:var(--brown)}
-.si-price{font-family:'Fredoka One',cursive;font-size:15px;color:var(--amber)}
-.target-strip{background:var(--sand);border-radius:14px;padding:12px 14px;border:2.5px dashed var(--gold2);margin-bottom:12px;display:none}
-.target-text{font-size:15px;font-weight:800;color:var(--brown)}
-.diff-row{display:flex;align-items:center;gap:8px;margin-top:6px;flex-wrap:wrap}
-.diff-num{font-family:'Fredoka One',cursive;font-size:28px}
-.diff-msg{font-size:13px;font-weight:800}
-.pay-btn{background:linear-gradient(135deg,var(--gold),var(--amber));color:#fff;border:none;border-radius:14px;padding:12px 26px;font-family:'Fredoka One',cursive;font-size:16px;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.15);transition:all .18s;display:none;margin-top:4px}
-.pay-btn:hover{transform:scale(1.06)}
-.shop-fb{font-family:'Fredoka One',cursive;font-size:16px;min-height:22px;margin-top:8px}
-.reset-btn{background:#fff;border:2.5px solid var(--gold2);color:var(--amber);font-family:'Fredoka One',cursive;font-size:14px;padding:10px 22px;border-radius:14px;cursor:pointer;margin-top:10px}
+:root{--ac:#B45309;--bg:#FDF6EE;--card:#fff;--ink:#1A2E2E;--ink2:#5F7A7A;--ok:#16A34A;--no:#DC2626;--r:20px}
+html,body{width:100%;min-height:100vh;font-family:'Poppins',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+.hdr{width:100%;position:sticky;top:0;z-index:100;background:var(--ac);box-shadow:0 4px 24px rgba(0,0,0,.15)}
+.hdr-in{max-width:640px;margin:0 auto;padding:14px 20px 0;text-align:center}
+.ch-n{font-family:'Grandstander',cursive;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.65)}
+.ch-t{font-family:'Grandstander',cursive;font-size:clamp(18px,5vw,26px);font-weight:900;color:#fff;line-height:1.2;margin:2px 0 10px;text-shadow:0 2px 8px rgba(0,0,0,.1)}
+.tabs{display:flex;gap:4px;max-width:280px;margin:0 auto;background:rgba(0,0,0,.1);border-radius:14px 14px 0 0;padding:4px 4px 0}
+.tab{flex:1;padding:9px 0;text-align:center;font-family:'Grandstander',cursive;font-size:14px;font-weight:800;cursor:pointer;border-radius:12px 12px 0 0;color:rgba(255,255,255,.6);transition:.2s;user-select:none}
+.tab.on{background:var(--bg);color:var(--ac)}
+.tab:not(.on):hover{color:#fff;background:rgba(255,255,255,.08)}
+.page{max-width:620px;margin:0 auto;padding:14px 14px 60px}
+.pnl{display:none;flex-direction:column;gap:16px}.pnl.on{display:flex}
+.card{background:var(--card);border-radius:var(--r);padding:20px 18px;box-shadow:0 3px 16px rgba(0,0,0,.06);position:relative;overflow:hidden}
+.cb{position:absolute;top:0;left:0;bottom:0;width:5px;border-radius:var(--r) 0 0 var(--r);background:var(--ac)}
+.ct{font-family:'Grandstander',cursive;font-size:15px;font-weight:800;padding-left:14px;margin-bottom:3px;line-height:1.3}
+.cs{font-size:12px;color:var(--ink2);padding-left:14px;margin-bottom:14px;line-height:1.6}
+/* stepper */
+.cr{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.cg{display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.03);border-radius:12px;padding:8px 12px;border:1.5px solid rgba(0,0,0,.06)}
+.cl{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;min-width:48px}
+.sb{width:34px;height:34px;border-radius:50%;border:none;font-size:18px;font-weight:900;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.12s;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+.sb:active{transform:scale(.88)}
+.sv{font-family:'Grandstander',cursive;font-size:28px;font-weight:900;min-width:28px;text-align:center}
+/* blocks */
+.bx{background:rgba(0,0,0,.02);border-radius:14px;border:1.5px solid rgba(0,0,0,.06);padding:12px;min-height:60px;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-end;margin-bottom:14px}
+.flat{display:grid;grid-template-columns:repeat(10,8px);gap:1px}.flat-c{width:8px;height:8px;border-radius:1px;opacity:.8}
+.rod{display:flex;flex-direction:column;gap:1px}.rod-c{width:10px;height:10px;border-radius:1px;opacity:.8}
+.units{display:flex;flex-wrap:wrap;gap:2px;max-width:58px;align-self:flex-end}.unit-c{width:10px;height:10px;border-radius:2px;opacity:.8}
+.sep{width:1px;background:#D1D5DB;align-self:stretch;margin:0 3px}
+/* options */
+.opts{display:flex;gap:8px;flex-wrap:wrap}
+.opt{font-family:'Grandstander',cursive;font-size:22px;font-weight:800;min-width:72px;height:54px;border-radius:16px;border:2.5px solid rgba(0,0,0,.08);background:#fff;cursor:pointer;color:var(--ink);display:flex;align-items:center;justify-content:center;transition:.15s;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.opt:hover{border-color:var(--ac);transform:translateY(-2px)}
+.opt.ok{background:#DCFCE7;border-color:var(--ok);color:#15803D;animation:pop .3s}
+.opt.no{background:#FEE2E2;border-color:var(--no);color:var(--no);animation:shk .35s}
+@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.08)}100%{transform:scale(1)}}
+@keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.fb{font-family:'Grandstander',cursive;font-size:14px;font-weight:700;min-height:20px;margin-top:10px;text-align:center}
+.nbtn{font-family:'Grandstander',cursive;font-size:14px;font-weight:800;padding:10px 24px;border-radius:14px;border:none;background:var(--ac);color:#fff;cursor:pointer;margin-top:12px;box-shadow:0 3px 10px rgba(0,0,0,.12);transition:.15s}
+.nbtn:hover{transform:translateY(-1px);opacity:.9}
+.btn{font-family:'Grandstander',cursive;font-size:14px;font-weight:800;padding:10px 20px;border-radius:14px;border:none;cursor:pointer;transition:.15s;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.btn:hover{transform:translateY(-1px)}
+.btn-p{background:var(--ac);color:#fff}
+.btn-g{background:#fff;color:var(--ink2);border:1.5px solid rgba(0,0,0,.1)}
+.btn-g:hover{border-color:var(--ac);color:var(--ac)}
+.chal{background:rgba(0,0,0,.02);border-radius:16px;padding:14px;border:1.5px dashed rgba(0,0,0,.1);margin-top:10px}
+.chal-q{font-family:'Grandstander',cursive;font-size:14px;font-weight:800;margin-bottom:10px}
+.chal-q b{color:var(--ac);font-size:22px}
+canvas{display:block;border-radius:10px}
+/* drag & tap shared */
+.tappable{cursor:pointer;user-select:none;transition:transform .15s}
+.tappable:hover{transform:scale(1.08)}
+.tappable:active{transform:scale(.92)}
+/* misc */
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pill{display:inline-block;font-family:'Grandstander',cursive;font-size:14px;font-weight:800;padding:6px 18px;border-radius:30px}
+.big{font-family:'Grandstander',cursive;font-weight:900;line-height:1;text-align:center}
 </style>
 </head>
 <body>
-<div class="awning"></div>
-<div class="mkt-header">
-  <div class="mh-title">💰 Money</div>
-  <div class="mh-chip">Chapter 12</div>
-</div>
+<div class="hdr"><div class="hdr-in">
+  <div class="ch-n">Chapter 12</div>
+  <div class="ch-t">Money</div>
+  <div class="tabs">
+    <div class="tab on" onclick="sw('learn')">Learn</div>
+    <div class="tab" onclick="sw('practice')">Practice</div>
+  </div>
+</div></div>
 <div class="page">
 
-  <div class="mcard gold">
-    <div class="mc-title">🪙 Tap coins and notes to fill your wallet!</div>
-    <div class="hint">Tap any coin or note below to add it. Tap coins IN your wallet to remove them. Watch your total change!</div>
-    <div class="palette" id="walletPal"></div>
-    <div style="font-family:'Fredoka One',cursive;font-size:13px;color:var(--amber);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Your wallet:</div>
-    <div class="wallet-zone" id="walletZone"><span class="w-ph" id="walletPh">Tap coins above to add them…</span></div>
-    <div class="total-row">
-      <div class="total-big">₹<span id="walletTotal">0</span></div>
+<div class="pnl on" id="p-learn">
+  <div class="card"><div class="cb"></div>
+    <div class="ct">Explore Indian coins and notes</div>
+    <div class="cs">Tap a coin or note to add it to the wallet. Tap it in the wallet to remove.</div>
+    <div style="margin-bottom:12px">
+      <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2);margin-bottom:8px">Tap to add</div>
+      <div id="palette" style="display:flex;gap:6px;flex-wrap:wrap"></div>
     </div>
-    <button class="clr-btn" onclick="clearWallet()">🗑 Clear wallet</button>
-  </div>
-
-  <div class="mcard amber">
-    <div class="mc-title">🛒 Shop game — pay the exact amount!</div>
-    <div class="hint">Tap the item you want. Then use coins and notes to make exactly that price. Not too much, not too little!</div>
-    <div class="shop-grid" id="shopGrid"></div>
-    <div class="target-strip" id="targetStrip">
-      <div class="target-text" id="targetText"></div>
-      <div class="diff-row">
-        <span style="font-size:14px;font-weight:700;color:var(--amber)">You have:</span>
-        <span class="diff-num" id="shopHave" style="color:var(--green)">₹0</span>
-        <span style="font-size:14px;color:#9CA3AF;font-weight:700">of</span>
-        <span class="diff-num" id="shopNeed" style="color:var(--amber)">₹0</span>
-        <span class="diff-msg" id="shopDiff"></span>
-      </div>
+    <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2);margin-bottom:8px">Your wallet — tap to remove</div>
+    <div id="wallet" style="min-height:60px;padding:12px;background:rgba(0,0,0,.02);border-radius:14px;border:1.5px solid rgba(0,0,0,.06);display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start;margin-bottom:14px"></div>
+    <div style="text-align:center;background:rgba(0,0,0,.02);border-radius:14px;padding:14px;border:1.5px solid rgba(0,0,0,.06)">
+      <div style="font-size:12px;font-weight:700;color:var(--ink2)">Total</div>
+      <div class="big" style="font-size:56px;color:var(--ac)">₹<span id="wTot">0</span></div>
     </div>
-    <div class="palette" id="shopPal" style="display:none"></div>
-    <div class="wallet-zone" id="shopWallet" style="display:none;margin-bottom:8px"><span class="w-ph" id="shopWalletPh">Tap coins above to build the amount…</span></div>
-    <button class="pay-btn" id="payBtn" onclick="checkPay()">Pay now ✓</button>
-    <div class="shop-fb" id="shopFb"></div>
-    <button class="reset-btn" onclick="resetShop()">Choose another item ↻</button>
+    <div style="text-align:center;margin-top:10px"><button class="btn btn-g" onclick="clrW()">Empty wallet ↻</button></div>
   </div>
-
+</div>
+<div class="pnl" id="p-practice">
+  <div class="card"><div class="cb"></div>
+    <div class="ct">The shop</div>
+    <div class="cs">Pick exact change for the item. Tap coins to add. Hit Pay when you have the right amount!</div>
+    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px" id="shopItem"></div>
+    <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2);margin-bottom:8px">Add coins</div>
+    <div id="shopPal" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px"></div>
+    <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2);margin-bottom:8px">Your payment</div>
+    <div id="shopWal" style="min-height:50px;padding:12px;background:rgba(0,0,0,.02);border-radius:14px;border:1.5px solid rgba(0,0,0,.06);display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px"></div>
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px">
+      <div class="big" style="font-size:30px;color:var(--ac)">₹<span id="sTot">0</span></div>
+      <span style="font-size:14px;font-weight:700;color:var(--ink2)">of ₹<span id="sPrice">0</span></span>
+    </div>
+    <div class="row"><button class="btn btn-p" onclick="payS()">Pay ₹</button><button class="btn btn-g" onclick="nwShop()">New item ↻</button></div>
+    <div class="fb" id="shopFb"></div>
+  </div>
+</div>
 </div>
 <script>
-const DENOMS=[
-  {val:1,label:'₹1',kind:'coin',r:19,bg:'#D1D5DB',tc:'#374151'},
-  {val:2,label:'₹2',kind:'coin',r:21,bg:'#C0AE80',tc:'#3B2F2F'},
-  {val:5,label:'₹5',kind:'coin',r:23,bg:'#C8A951',tc:'#3B2F2F'},
-  {val:10,label:'₹10',kind:'coin',r:25,bg:'#B8860B',tc:'#fff'},
-  {val:20,label:'₹20',kind:'note',w:62,h:32,bg:'#FCA5A5',tc:'#7F1D1D'},
-  {val:50,label:'₹50',kind:'note',w:68,h:34,bg:'#86EFAC',tc:'#14532D'},
-  {val:100,label:'₹100',kind:'note',w:74,h:36,bg:'#93C5FD',tc:'#1E3A8A'},
-];
-function coinSVG(d,sc=1){
-  if(d.kind==='coin'){const sz=d.r*2*sc;return`<svg width="${sz}" height="${sz}" viewBox="0 0 ${d.r*2} ${d.r*2}"><circle cx="${d.r}" cy="${d.r}" r="${d.r-2}" fill="${d.bg}" stroke="${d.tc}" stroke-width="2"/><text x="${d.r}" y="${d.r+5}" text-anchor="middle" font-family="Nunito" font-size="${d.r*.55}px" font-weight="900" fill="${d.tc}">${d.label}</text></svg>`;}
-  const w=d.w*sc,h=d.h*sc;return`<svg width="${w}" height="${h}" viewBox="0 0 ${d.w} ${d.h}"><rect x="1" y="1" width="${d.w-2}" height="${d.h-2}" rx="5" fill="${d.bg}" stroke="${d.tc}" stroke-width="1.5"/><text x="${d.w/2}" y="${d.h/2+5}" text-anchor="middle" font-family="Nunito" font-size="${d.h*.35}px" font-weight="900" fill="${d.tc}">${d.label}</text></svg>`;
-}
+function sw(n){document.querySelectorAll('.tab').forEach(function(t){t.classList.toggle('on',t.textContent.toLowerCase()===n)});document.querySelectorAll('.pnl').forEach(function(p){var a=p.id==='p-'+n;p.classList.toggle('on',a);p.style.display=a?'flex':'none'})}
+document.getElementById('p-practice').style.display='none';
+function pool4(ans,lo,hi){var s=new Set([ans]);var i=0;while(s.size<4&&i<50){i++;var w=ans+Math.round(Math.random()*8-4);if(w>=lo&&w<=hi&&w!==ans)s.add(w)}return[...s].sort(function(){return Math.random()-.5})}
+function mkOpts(cid,items,correct,fid){var c=document.getElementById(cid);c.innerHTML='';items.forEach(function(n){var b=document.createElement('button');b.className='opt';b.textContent=n;b.onclick=function(){c.querySelectorAll('.opt').forEach(function(x){x.onclick=null});var fb=document.getElementById(fid);if(String(n)===String(correct)){b.classList.add('ok');fb.textContent='🎉 Correct!';fb.style.color='var(--ok)'}else{b.classList.add('no');fb.textContent='The answer is '+correct+'.';fb.style.color='var(--no)';c.querySelectorAll('.opt').forEach(function(x){if(String(x.textContent)===String(correct))x.classList.add('ok')})}};c.appendChild(b)})}
 
-/* Wallet */
-let walItems=[];
-function buildPal(id,fn){
-  const pal=document.getElementById(id);pal.innerHTML='';
-  DENOMS.forEach(d=>{const btn=document.createElement('button');btn.className='coin-btn';btn.innerHTML=coinSVG(d)+'<span class="coin-name">'+d.label+'</span>';btn.onclick=()=>fn(d);pal.appendChild(btn);});
-}
-function addToWal(d){
-  walItems.push(d);const ph=document.getElementById('walletPh');if(ph)ph.remove();
-  const item=document.createElement('div');item.className='w-item';
-  item.innerHTML=coinSVG(d,.85)+'<div class="remove-dot">✕</div>';
-  item.onclick=()=>{walItems.splice(walItems.indexOf(d),1);item.remove();if(!document.getElementById('walletZone').querySelector('.w-item'))document.getElementById('walletZone').innerHTML='<span class="w-ph" id="walletPh">Tap coins above to add them…</span>';updateWalTotal();};
-  document.getElementById('walletZone').appendChild(item);updateWalTotal();
-}
-function updateWalTotal(){document.getElementById('walletTotal').textContent=walItems.reduce((s,d)=>s+d.val,0);}
-function clearWallet(){walItems=[];document.getElementById('walletZone').innerHTML='<span class="w-ph" id="walletPh">Tap coins above to add them…</span>';document.getElementById('walletTotal').textContent=0;}
-buildPal('walletPal',addToWal);
-
+var COINS=[{v:1,l:'₹1',bg:'#D4D4D8',fg:'#3F3F46',r:20},{v:2,l:'₹2',bg:'#D4D4D8',fg:'#3F3F46',r:22},{v:5,l:'₹5',bg:'#FDE68A',fg:'#92400E',r:24},{v:10,l:'₹10',bg:'#FDE68A',fg:'#92400E',r:26},{v:20,l:'₹20',bg:'#BBF7D0',fg:'#166534',r:30,note:true},{v:50,l:'₹50',bg:'#BFDBFE',fg:'#1E40AF',r:30,note:true},{v:100,l:'₹100',bg:'#E9D5FF',fg:'#6B21A8',r:30,note:true}];
+function mkCoin(coin,onClick){
+  var d=document.createElement('div');d.style.cssText='display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;transition:.12s;font-family:Grandstander,cursive;font-weight:900;';
+  if(coin.note){d.style.cssText+='width:60px;height:32px;border-radius:6px;background:'+coin.bg+';color:'+coin.fg+';font-size:13px;border:2px solid '+coin.fg+'33'}
+  else{d.style.cssText+='width:'+(coin.r*2)+'px;height:'+(coin.r*2)+'px;border-radius:50%;background:'+coin.bg+';color:'+coin.fg+';font-size:'+(coin.r>22?13:11)+'px;border:2px solid '+coin.fg+'33;box-shadow:inset 0 -2px 4px rgba(0,0,0,.1)'}
+  d.textContent=coin.l;d.onmouseenter=function(){d.style.transform='scale(1.1)'};d.onmouseleave=function(){d.style.transform=''};d.onclick=function(){onClick(coin)};return d}
+/* Palette */
+function bldPal(id,onClick){var el=document.getElementById(id);el.innerHTML='';COINS.forEach(function(c){el.appendChild(mkCoin(c,onClick))})}
+var walletCoins=[];
+function addW(coin){walletCoins.push(coin.v);rndrW()}
+function rmW(idx){walletCoins.splice(idx,1);rndrW()}
+function rndrW(){var el=document.getElementById('wallet');el.innerHTML='';walletCoins.forEach(function(v,i){var c=COINS.find(function(x){return x.v===v});if(c){var d=mkCoin(c,function(){rmW(i)});el.appendChild(d)}});document.getElementById('wTot').textContent=walletCoins.reduce(function(a,b){return a+b},0)}
+function clrW(){walletCoins=[];rndrW()}
+bldPal('palette',addW);rndrW();
 /* Shop */
-const SHOP=[
-  {name:'Pencil',em:'✏️',price:5},{name:'Eraser',em:'🔲',price:3},{name:'Ruler',em:'📏',price:10},
-  {name:'Notebook',em:'📒',price:20},{name:'Crayons',em:'🖍️',price:50},{name:'Ball',em:'⚽',price:100},
-  {name:'Toffee',em:'🍬',price:2},{name:'Biscuit',em:'🍪',price:8},{name:'Badge',em:'🏅',price:15},
-];
-let shopTarget=0,shopItems=[];
-function buildShop(){
-  const g=document.getElementById('shopGrid');g.innerHTML='';
-  SHOP.forEach((item)=>{
-    const d=document.createElement('div');d.className='shop-item';
-    d.innerHTML=`<div class="si-em">${item.em}</div><div class="si-name">${item.name}</div><div class="si-price">₹${item.price}</div>`;
-    d.onclick=()=>selectShopItem(item,d);g.appendChild(d);
-  });
-}
-function selectShopItem(item,el){
-  document.querySelectorAll('.shop-item').forEach(x=>x.classList.remove('sel'));el.classList.add('sel');
-  shopTarget=item.price;shopItems=[];
-  document.getElementById('targetStrip').style.display='block';
-  document.getElementById('targetText').textContent=`You want ${item.name} ${item.em} — it costs ₹${item.price}. Build exactly ₹${item.price}!`;
-  document.getElementById('shopNeed').textContent='₹'+item.price;document.getElementById('shopHave').textContent='₹0';
-  document.getElementById('shopDiff').textContent='Need ₹'+item.price+' more';document.getElementById('shopDiff').style.color='var(--red)';
-  document.getElementById('shopPal').style.display='flex';document.getElementById('shopWallet').style.display='flex';
-  document.getElementById('shopWallet').innerHTML='<span class="w-ph" id="shopWalletPh">Tap coins above to build the amount…</span>';
-  document.getElementById('payBtn').style.display='inline-block';document.getElementById('shopFb').textContent='';
-}
-function addToShopWallet(d){
-  shopItems.push(d);const ph=document.getElementById('shopWalletPh');if(ph)ph.remove();
-  const item=document.createElement('div');item.className='w-item';
-  item.innerHTML=coinSVG(d,.85)+'<div class="remove-dot">✕</div>';
-  item.onclick=()=>{shopItems.splice(shopItems.indexOf(d),1);item.remove();if(!document.getElementById('shopWallet').querySelector('.w-item'))document.getElementById('shopWallet').innerHTML='<span class="w-ph" id="shopWalletPh">Tap coins above…</span>';updateShopTotal();};
-  document.getElementById('shopWallet').appendChild(item);updateShopTotal();
-}
-function updateShopTotal(){
-  const have=shopItems.reduce((s,d)=>s+d.val,0);document.getElementById('shopHave').textContent='₹'+have;
-  const diff=have-shopTarget;
-  if(diff===0){document.getElementById('shopDiff').textContent='Exact! ✓';document.getElementById('shopDiff').style.color='var(--green)';}
-  else if(diff<0){document.getElementById('shopDiff').textContent='Need ₹'+Math.abs(diff)+' more';document.getElementById('shopDiff').style.color='var(--red)';}
-  else{document.getElementById('shopDiff').textContent='₹'+diff+' too much!';document.getElementById('shopDiff').style.color='var(--amber)';}
-}
-function checkPay(){
-  const have=shopItems.reduce((s,d)=>s+d.val,0);const fb=document.getElementById('shopFb');
-  if(have===shopTarget){fb.textContent='🎉 Perfect! Exact change! ₹'+shopTarget+' paid! ⭐';fb.style.color='var(--green)';}
-  else if(have<shopTarget){fb.textContent='Not enough! Need ₹'+(shopTarget-have)+' more.';fb.style.color='var(--red)';}
-  else{fb.textContent='Too much by ₹'+(have-shopTarget)+'! Remove some coins.';fb.style.color='var(--amber)';}
-}
-function resetShop(){document.querySelectorAll('.shop-item').forEach(x=>x.classList.remove('sel'));['targetStrip','shopPal','shopWallet'].forEach(id=>document.getElementById(id).style.display='none');document.getElementById('payBtn').style.display='none';document.getElementById('shopFb').textContent='';shopItems=[];}
-buildPal('shopPal',addToShopWallet);buildShop();
+var ITEMS=[{n:'Pencil',e:'✏️',p:5},{n:'Eraser',e:'🧽',p:3},{n:'Sharpener',e:'🔧',p:7},{n:'Notebook',e:'📓',p:20},{n:'Ruler',e:'📏',p:15},{n:'Candy',e:'🍬',p:2},{n:'Juice box',e:'🧃',p:10},{n:'Banana',e:'🍌',p:8},{n:'Samosa',e:'🥟',p:12},{n:'Sticker sheet',e:'⭐',p:25},{n:'Toy car',e:'🚗',p:50},{n:'Ball',e:'⚽',p:30}];
+var shopCoins=[],shopPrice=0;
+function nwShop(){var it=ITEMS[Math.floor(Math.random()*ITEMS.length)];shopPrice=it.p;shopCoins=[];
+document.getElementById('shopItem').innerHTML='<span style="font-size:42px">'+it.e+'</span><div><div style="font-size:16px;font-weight:800">'+it.n+'</div><div class="big" style="font-size:28px;color:var(--ac)">₹'+it.p+'</div></div>';
+document.getElementById('sPrice').textContent=shopPrice;document.getElementById('shopFb').textContent='';rndrSW()}
+function addSW(coin){shopCoins.push(coin.v);rndrSW()}
+function rmSW(idx){shopCoins.splice(idx,1);rndrSW()}
+function rndrSW(){var el=document.getElementById('shopWal');el.innerHTML='';shopCoins.forEach(function(v,i){var c=COINS.find(function(x){return x.v===v});if(c){var d=mkCoin(c,function(){rmSW(i)});el.appendChild(d)}});var t=shopCoins.reduce(function(a,b){return a+b},0);document.getElementById('sTot').textContent=t}
+function payS(){var t=shopCoins.reduce(function(a,b){return a+b},0);var fb=document.getElementById('shopFb');if(t===shopPrice){fb.textContent='🎉 Exact change! You bought it!';fb.style.color='var(--ok)'}else if(t<shopPrice){fb.textContent='₹'+(shopPrice-t)+' more needed.';fb.style.color='var(--no)'}else{fb.textContent='Too much! You gave ₹'+(t-shopPrice)+' extra. Remove some coins.';fb.style.color='var(--no)'}}
+bldPal('shopPal',addSW);nwShop();
+
 </script>
 </body>
 </html>
