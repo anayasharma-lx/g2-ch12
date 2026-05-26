@@ -79,38 +79,86 @@ canvas{display:block;border-radius:10px}
 
 <div class="pnl on" id="p-learn">
   <div class="card"><div class="cb"></div>
-    <div class="ct">Explore Indian coins and notes</div>
-    <div class="cs">Tap a coin or note to add it to the wallet. Tap it in the wallet to remove.</div>
-    <div style="margin-bottom:12px">
-      <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2);margin-bottom:8px">Tap to add</div>
-      <div id="palette" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+    <div class="ct">The coin shop</div>
+    <div class="cs">Pick an item, build the exact price with coins, then tap Pay!</div>
+
+    <div id="successOverlay" style="display:none;position:fixed;inset:0;z-index:999;align-items:center;justify-content:center;background:rgba(0,0,0,.45);backdrop-filter:blur(4px)">
+      <div id="receiptCard" style="background:#fff;border-radius:28px;padding:32px 28px;max-width:320px;width:90%;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.25);position:relative;overflow:hidden">
+        <div style="font-size:72px;margin-bottom:6px" id="rcEmoji">🍎</div>
+        <div style="font-family:Grandstander,cursive;font-size:22px;font-weight:900;color:var(--ok);margin-bottom:3px">🎉 Purchased!</div>
+        <div style="font-family:Grandstander,cursive;font-size:18px;font-weight:800;color:var(--ink);margin-bottom:16px" id="rcName">Apple</div>
+        <div style="background:rgba(0,0,0,.03);border-radius:14px;padding:14px;margin-bottom:16px;text-align:left;border:1.5px solid rgba(0,0,0,.06)">
+          <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2);margin-bottom:8px">Receipt</div>
+          <div id="rcCoins" style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;border-top:1.5px dashed rgba(0,0,0,.1);padding-top:10px">
+            <span style="font-size:13px;font-weight:700;color:var(--ink2)">Total paid</span>
+            <span style="font-family:Grandstander,cursive;font-size:22px;font-weight:900;color:var(--ac)">₹<span id="rcTotal">0</span></span>
+          </div>
+        </div>
+        <div id="confettiArea" style="position:absolute;inset:0;pointer-events:none;overflow:hidden"></div>
+        <button onclick="closeSuccess()" style="font-family:Grandstander,cursive;font-size:16px;font-weight:800;padding:13px 30px;border-radius:16px;border:none;background:var(--ac);color:#fff;cursor:pointer;width:100%;box-shadow:0 4px 12px rgba(0,0,0,.15)">Shop again! →</button>
+      </div>
     </div>
-    <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2);margin-bottom:8px">Your wallet — tap to remove</div>
-    <div id="wallet" style="min-height:60px;padding:12px;background:rgba(0,0,0,.02);border-radius:14px;border:1.5px solid rgba(0,0,0,.06);display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start;margin-bottom:14px"></div>
-    <div style="text-align:center;background:rgba(0,0,0,.02);border-radius:14px;padding:14px;border:1.5px solid rgba(0,0,0,.06)">
-      <div style="font-size:12px;font-weight:700;color:var(--ink2)">Total</div>
-      <div class="big" style="font-size:56px;color:var(--ac)">₹<span id="wTot">0</span></div>
+
+    <!-- 6 items in one row -->
+    <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2);margin-bottom:8px">Choose an item</div>
+    <div id="shelf" style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px"></div>
+
+    <div id="selDisp" style="display:none;background:rgba(0,0,0,.02);border-radius:14px;padding:12px 16px;border:1.5px solid rgba(0,0,0,.06);margin-bottom:14px;align-items:center;gap:14px">
+      <div style="text-align:center;flex-shrink:0">
+        <div style="font-size:40px" id="selEmoji"></div>
+        <div style="font-family:Grandstander,cursive;font-size:13px;font-weight:800" id="selName"></div>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2)">Price</div>
+        <div class="big" style="font-size:40px;color:var(--ac)">₹<span id="selPrice">0</span></div>
+      </div>
     </div>
-    <div style="text-align:center;margin-top:10px"><button class="btn btn-g" onclick="clrW()">Empty wallet ↻</button></div>
-  </div>
-</div>
-<div class="pnl" id="p-practice">
-  <div class="card"><div class="cb"></div>
-    <div class="ct">The shop</div>
-    <div class="cs">Pick exact change for the item. Tap coins to add. Hit Pay when you have the right amount!</div>
-    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px" id="shopItem"></div>
-    <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2);margin-bottom:8px">Add coins</div>
-    <div id="shopPal" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px"></div>
-    <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2);margin-bottom:8px">Your payment</div>
-    <div id="shopWal" style="min-height:50px;padding:12px;background:rgba(0,0,0,.02);border-radius:14px;border:1.5px solid rgba(0,0,0,.06);display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px"></div>
-    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px">
-      <div class="big" style="font-size:30px;color:var(--ac)">₹<span id="sTot">0</span></div>
-      <span style="font-size:14px;font-weight:700;color:var(--ink2)">of ₹<span id="sPrice">0</span></span>
+
+    <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2);margin-bottom:8px">Tap to add coins</div>
+    <div id="palette" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px"></div>
+
+    <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2);margin-bottom:6px">Your wallet — tap a coin to remove</div>
+    <div id="wallet" style="min-height:52px;padding:10px;background:rgba(0,0,0,.02);border-radius:12px;border:1.5px dashed rgba(0,0,0,.1);display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px"></div>
+
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+      <div class="big" style="font-size:32px;color:var(--ac)">₹<span id="wTot">0</span></div>
+      <div style="flex:1;min-width:80px">
+        <div style="height:10px;background:rgba(0,0,0,.06);border-radius:10px;overflow:hidden">
+          <div id="pgBar" style="height:100%;background:var(--ac);border-radius:10px;width:0%;transition:.35s"></div>
+        </div>
+        <div style="font-size:11px;font-weight:700;color:var(--ink2);margin-top:3px" id="pgLbl">Select an item first</div>
+      </div>
     </div>
-    <div class="row"><button class="btn btn-p" onclick="payS()">Pay ₹</button><button class="btn btn-g" onclick="nwShop()">New item ↻</button></div>
+    <div class="row">
+      <button class="btn btn-p" onclick="payNow()">Pay ₹</button>
+      <button class="btn btn-g" onclick="clearW()">Clear ↻</button>
+    </div>
     <div class="fb" id="shopFb"></div>
   </div>
 </div>
+
+<div class="pnl" id="p-practice">
+  <div class="card"><div class="cb"></div>
+    <div class="ct">Make the exact amount</div>
+    <div class="cs">Add coins that total exactly the target amount.</div>
+    <div style="text-align:center;background:rgba(0,0,0,.02);border-radius:14px;padding:14px;border:1.5px solid rgba(0,0,0,.06);margin-bottom:14px">
+      <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2)">Make exactly</div>
+      <div class="big" style="font-size:52px;color:var(--ac)">₹<span id="pTgt">0</span></div>
+    </div>
+    <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2);margin-bottom:8px">Add coins</div>
+    <div id="pPal" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px"></div>
+    <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2);margin-bottom:6px">Your selection — tap to remove</div>
+    <div id="pWal" style="min-height:48px;padding:10px;background:rgba(0,0,0,.02);border-radius:12px;border:1.5px dashed rgba(0,0,0,.1);display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px"></div>
+    <div style="font-family:Grandstander,cursive;font-size:24px;font-weight:900;color:var(--ac);margin-bottom:10px">₹<span id="pTot">0</span></div>
+    <div class="row">
+      <button class="btn btn-p" onclick="ckPay()">Check ✓</button>
+      <button class="btn btn-g" onclick="nwPQ()">New amount ↻</button>
+    </div>
+    <div class="fb" id="pFb"></div>
+  </div>
+</div>
+
 </div>
 <script>
 function sw(n){document.querySelectorAll('.tab').forEach(function(t){t.classList.toggle('on',t.textContent.toLowerCase()===n)});document.querySelectorAll('.pnl').forEach(function(p){var a=p.id==='p-'+n;p.classList.toggle('on',a);p.style.display=a?'flex':'none'})}
@@ -118,31 +166,105 @@ document.getElementById('p-practice').style.display='none';
 function pool4(ans,lo,hi){var s=new Set([ans]);var i=0;while(s.size<4&&i<50){i++;var w=ans+Math.round(Math.random()*8-4);if(w>=lo&&w<=hi&&w!==ans)s.add(w)}return[...s].sort(function(){return Math.random()-.5})}
 function mkOpts(cid,items,correct,fid){var c=document.getElementById(cid);c.innerHTML='';items.forEach(function(n){var b=document.createElement('button');b.className='opt';b.textContent=n;b.onclick=function(){c.querySelectorAll('.opt').forEach(function(x){x.onclick=null});var fb=document.getElementById(fid);if(String(n)===String(correct)){b.classList.add('ok');fb.textContent='🎉 Correct!';fb.style.color='var(--ok)'}else{b.classList.add('no');fb.textContent='The answer is '+correct+'.';fb.style.color='var(--no)';c.querySelectorAll('.opt').forEach(function(x){if(String(x.textContent)===String(correct))x.classList.add('ok')})}};c.appendChild(b)})}
 
-var COINS=[{v:1,l:'₹1',bg:'#D4D4D8',fg:'#3F3F46',r:20},{v:2,l:'₹2',bg:'#D4D4D8',fg:'#3F3F46',r:22},{v:5,l:'₹5',bg:'#FDE68A',fg:'#92400E',r:24},{v:10,l:'₹10',bg:'#FDE68A',fg:'#92400E',r:26},{v:20,l:'₹20',bg:'#BBF7D0',fg:'#166534',r:30,note:true},{v:50,l:'₹50',bg:'#BFDBFE',fg:'#1E40AF',r:30,note:true},{v:100,l:'₹100',bg:'#E9D5FF',fg:'#6B21A8',r:30,note:true}];
-function mkCoin(coin,onClick){
-  var d=document.createElement('div');d.style.cssText='display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;transition:.12s;font-family:Grandstander,cursive;font-weight:900;';
-  if(coin.note){d.style.cssText+='width:60px;height:32px;border-radius:6px;background:'+coin.bg+';color:'+coin.fg+';font-size:13px;border:2px solid '+coin.fg+'33'}
-  else{d.style.cssText+='width:'+(coin.r*2)+'px;height:'+(coin.r*2)+'px;border-radius:50%;background:'+coin.bg+';color:'+coin.fg+';font-size:'+(coin.r>22?13:11)+'px;border:2px solid '+coin.fg+'33;box-shadow:inset 0 -2px 4px rgba(0,0,0,.1)'}
-  d.textContent=coin.l;d.onmouseenter=function(){d.style.transform='scale(1.1)'};d.onmouseleave=function(){d.style.transform=''};d.onclick=function(){onClick(coin)};return d}
-/* Palette */
-function bldPal(id,onClick){var el=document.getElementById(id);el.innerHTML='';COINS.forEach(function(c){el.appendChild(mkCoin(c,onClick))})}
-var walletCoins=[];
-function addW(coin){walletCoins.push(coin.v);rndrW()}
-function rmW(idx){walletCoins.splice(idx,1);rndrW()}
-function rndrW(){var el=document.getElementById('wallet');el.innerHTML='';walletCoins.forEach(function(v,i){var c=COINS.find(function(x){return x.v===v});if(c){var d=mkCoin(c,function(){rmW(i)});el.appendChild(d)}});document.getElementById('wTot').textContent=walletCoins.reduce(function(a,b){return a+b},0)}
-function clrW(){walletCoins=[];rndrW()}
-bldPal('palette',addW);rndrW();
-/* Shop */
-var ITEMS=[{n:'Pencil',e:'✏️',p:5},{n:'Eraser',e:'🧽',p:3},{n:'Sharpener',e:'🔧',p:7},{n:'Notebook',e:'📓',p:20},{n:'Ruler',e:'📏',p:15},{n:'Candy',e:'🍬',p:2},{n:'Juice box',e:'🧃',p:10},{n:'Banana',e:'🍌',p:8},{n:'Samosa',e:'🥟',p:12},{n:'Sticker sheet',e:'⭐',p:25},{n:'Toy car',e:'🚗',p:50},{n:'Ball',e:'⚽',p:30}];
-var shopCoins=[],shopPrice=0;
-function nwShop(){var it=ITEMS[Math.floor(Math.random()*ITEMS.length)];shopPrice=it.p;shopCoins=[];
-document.getElementById('shopItem').innerHTML='<span style="font-size:42px">'+it.e+'</span><div><div style="font-size:16px;font-weight:800">'+it.n+'</div><div class="big" style="font-size:28px;color:var(--ac)">₹'+it.p+'</div></div>';
-document.getElementById('sPrice').textContent=shopPrice;document.getElementById('shopFb').textContent='';rndrSW()}
-function addSW(coin){shopCoins.push(coin.v);rndrSW()}
-function rmSW(idx){shopCoins.splice(idx,1);rndrSW()}
-function rndrSW(){var el=document.getElementById('shopWal');el.innerHTML='';shopCoins.forEach(function(v,i){var c=COINS.find(function(x){return x.v===v});if(c){var d=mkCoin(c,function(){rmSW(i)});el.appendChild(d)}});var t=shopCoins.reduce(function(a,b){return a+b},0);document.getElementById('sTot').textContent=t}
-function payS(){var t=shopCoins.reduce(function(a,b){return a+b},0);var fb=document.getElementById('shopFb');if(t===shopPrice){fb.textContent='🎉 Exact change! You bought it!';fb.style.color='var(--ok)'}else if(t<shopPrice){fb.textContent='₹'+(shopPrice-t)+' more needed.';fb.style.color='var(--no)'}else{fb.textContent='Too much! You gave ₹'+(t-shopPrice)+' extra. Remove some coins.';fb.style.color='var(--no)'}}
-bldPal('shopPal',addSW);nwShop();
+var COINS=[{v:1,l:'₹1',r:18,bg:'#D4D4D8',fg:'#3F3F46',note:false},
+           {v:2,l:'₹2',r:20,bg:'#D4D4D8',fg:'#3F3F46',note:false},
+           {v:5,l:'₹5',r:22,bg:'#FDE68A',fg:'#92400E',note:false},
+           {v:10,l:'₹10',r:24,bg:'#FDE68A',fg:'#92400E',note:false},
+           {v:20,l:'₹20',r:0,bg:'#BBF7D0',fg:'#166534',note:true},
+           {v:50,l:'₹50',r:0,bg:'#BFDBFE',fg:'#1E40AF',note:true},
+           {v:100,l:'₹100',r:0,bg:'#E9D5FF',fg:'#6B21A8',note:true}];
+
+/* Exactly 6 items — one neat row */
+var ITEMS=[{n:'Pencil',e:'✏️',p:5},{n:'Eraser',e:'🧽',p:3},{n:'Candy',e:'🍬',p:2},{n:'Juice',e:'🧃',p:10},{n:'Banana',e:'🍌',p:8},{n:'Notebook',e:'📓',p:20}];
+
+function mkCoinEl(coin,onClick){
+  var d=document.createElement('div');
+  if(coin.note){
+    d.style.cssText='display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;transition:.12s;font-family:Grandstander,cursive;font-weight:900;width:56px;height:30px;border-radius:6px;background:'+coin.bg+';color:'+coin.fg+';font-size:11px;border:1.5px solid '+coin.fg+'44;box-shadow:0 2px 5px rgba(0,0,0,.1);flex-shrink:0';
+  } else {
+    var s=coin.r*2;
+    d.style.cssText='display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;transition:.12s;font-family:Grandstander,cursive;font-weight:900;width:'+s+'px;height:'+s+'px;border-radius:50%;background:'+coin.bg+';color:'+coin.fg+';font-size:'+(s>40?13:11)+'px;border:2px solid '+coin.fg+'44;box-shadow:inset 0 -2px 4px rgba(0,0,0,.08),0 2px 5px rgba(0,0,0,.1);flex-shrink:0';
+  }
+  d.textContent=coin.l;
+  d.onmouseenter=function(){d.style.transform='scale(1.12) translateY(-2px)'};
+  d.onmouseleave=function(){d.style.transform=''};
+  d.onclick=function(){onClick(coin)};
+  return d;
+}
+
+var CONFETTI_COLS=['#D97706','#16A34A','#2563EB','#DC2626','#7C3AED','#DB2777'];
+function showSuccess(item,coins){
+  var ov=document.getElementById('successOverlay');ov.style.display='flex';
+  document.getElementById('rcEmoji').textContent=item.e;
+  document.getElementById('rcName').textContent=item.n;
+  document.getElementById('rcTotal').textContent=item.p;
+  var cc=document.getElementById('rcCoins');cc.innerHTML='';
+  var tally={};coins.forEach(function(v){tally[v]=(tally[v]||0)+1});
+  Object.keys(tally).sort(function(a,b){return b-a}).forEach(function(v){
+    var c=COINS.find(function(x){return x.v===parseInt(v)});if(!c)return;
+    var row=document.createElement('div');row.style.cssText='display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px';
+    var sm=document.createElement('div');sm.style.cssText='width:30px;height:30px;border-radius:50%;background:'+c.bg+';color:'+c.fg+';display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;font-family:Grandstander,cursive;border:1.5px solid '+c.fg+'44;flex-shrink:0';
+    if(c.note){sm.style.width='44px';sm.style.borderRadius='5px';sm.style.height='24px'}
+    sm.textContent=c.l;row.appendChild(sm);
+    row.appendChild(document.createTextNode('× '+tally[v]+' = ₹'+(parseInt(v)*tally[v])));
+    cc.appendChild(row);
+  });
+  var ca=document.getElementById('confettiArea');ca.innerHTML='';
+  for(var i=0;i<28;i++){var c=document.createElement('div');var sz=5+Math.random()*8;c.style.cssText='position:absolute;width:'+sz+'px;height:'+(sz*1.6)+'px;border-radius:2px;background:'+CONFETTI_COLS[Math.floor(Math.random()*CONFETTI_COLS.length)]+';left:'+Math.random()*100+'%;top:-10px;animation:cfall '+(1.2+Math.random()*1.2)+'s linear '+(Math.random()*.5)+'s forwards;opacity:.9';ca.appendChild(c)}
+  if(!document.getElementById('confettiKF')){var st=document.createElement('style');st.id='confettiKF';st.textContent='@keyframes cfall{to{transform:translateY(450px) rotate(540deg);opacity:0}}';document.head.appendChild(st)}
+}
+function closeSuccess(){document.getElementById('successOverlay').style.display='none';walletCoins=[];selItem=null;rndrW();updPg();upShelf();document.getElementById('shopFb').textContent=''}
+
+var selItem=null,walletCoins=[];
+function bldShelf(){
+  var el=document.getElementById('shelf');el.innerHTML='';
+  ITEMS.forEach(function(item,i){
+    var d=document.createElement('div');
+    d.style.cssText='display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 8px;background:#fff;border-radius:14px;border:2px solid rgba(0,0,0,.07);cursor:pointer;transition:.15s;min-width:72px;text-align:center;user-select:none;flex-shrink:0';
+    d.innerHTML='<span style="font-size:28px">'+item.e+'</span><span style="font-size:10px;font-weight:700;color:var(--ink2)">'+item.n+'</span><span style="font-family:Grandstander,cursive;font-size:14px;font-weight:900;color:var(--ac)">₹'+item.p+'</span>';
+    d.onmouseenter=function(){if(selItem!==i)d.style.borderColor='rgba(0,0,0,.15)'};
+    d.onmouseleave=function(){d.style.borderColor=selItem===i?'var(--ac)':'rgba(0,0,0,.07)'};
+    d.onclick=function(){selItem=i;walletCoins=[];rndrW();upShelf();updPg();document.getElementById('shopFb').textContent=''};
+    el.appendChild(d);
+  });
+}
+function upShelf(){
+  document.querySelectorAll('#shelf>div').forEach(function(d,i){d.style.borderColor=i===selItem?'var(--ac)':'rgba(0,0,0,.07)';d.style.background=i===selItem?'#FFFBEB':'#fff';d.style.transform=i===selItem?'scale(1.05)':''});
+  if(selItem!==null){var it=ITEMS[selItem];var sd=document.getElementById('selDisp');sd.style.display='flex';document.getElementById('selEmoji').textContent=it.e;document.getElementById('selName').textContent=it.n;document.getElementById('selPrice').textContent=it.p}
+}
+function bldPal(){var el=document.getElementById('palette');el.innerHTML='';COINS.forEach(function(c){el.appendChild(mkCoinEl(c,function(coin){walletCoins.push(coin.v);rndrW();updPg()}))})}
+function rndrW(){
+  var el=document.getElementById('wallet');el.innerHTML='';
+  walletCoins.forEach(function(v,i){var c=COINS.find(function(x){return x.v===v});if(c){var d=mkCoinEl(c,function(){walletCoins.splice(i,1);rndrW();updPg()});el.appendChild(d)}});
+  document.getElementById('wTot').textContent=walletCoins.reduce(function(a,b){return a+b},0);
+}
+function updPg(){
+  var t=walletCoins.reduce(function(a,b){return a+b},0);
+  if(selItem===null){document.getElementById('pgLbl').textContent='Select an item first';document.getElementById('pgBar').style.width='0%';return}
+  var price=ITEMS[selItem].p;var pct=Math.min(t/price*100,100);
+  var bar=document.getElementById('pgBar');bar.style.width=pct+'%';bar.style.background=t===price?'#16A34A':t>price?'#DC2626':'var(--ac)';
+  var lbl=document.getElementById('pgLbl');
+  if(t===price){lbl.textContent='✓ Exact! Ready to pay';lbl.style.color='#16A34A'}
+  else if(t<price){lbl.textContent='₹'+(price-t)+' more needed';lbl.style.color='var(--ink2)'}
+  else{lbl.textContent='₹'+(t-price)+' too much';lbl.style.color='#DC2626'}
+}
+function clearW(){walletCoins=[];rndrW();updPg();document.getElementById('shopFb').textContent=''}
+function payNow(){
+  var t=walletCoins.reduce(function(a,b){return a+b},0);var fb=document.getElementById('shopFb');
+  if(selItem===null){fb.textContent='Pick an item first!';fb.style.color='var(--no)';return}
+  var price=ITEMS[selItem].p;
+  if(t===price)showSuccess(ITEMS[selItem],walletCoins.slice());
+  else if(t<price){fb.textContent='₹'+(price-t)+' more needed.';fb.style.color='var(--no)'}
+  else{fb.textContent='₹'+(t-price)+' too much! Remove some coins.';fb.style.color='var(--no)'}
+}
+bldShelf();bldPal();rndrW();
+
+var pTgt=0,pCoins=[];
+function bldPPal(){var el=document.getElementById('pPal');el.innerHTML='';COINS.forEach(function(c){el.appendChild(mkCoinEl(c,function(coin){pCoins.push(coin.v);rndrPW()}))})}
+function rndrPW(){var el=document.getElementById('pWal');el.innerHTML='';pCoins.forEach(function(v,i){var c=COINS.find(function(x){return x.v===v});if(c){var d=mkCoinEl(c,function(){pCoins.splice(i,1);rndrPW()});el.appendChild(d)}});document.getElementById('pTot').textContent=pCoins.reduce(function(a,b){return a+b},0)}
+function ckPay(){var t=pCoins.reduce(function(a,b){return a+b},0);var fb=document.getElementById('pFb');if(t===pTgt){fb.textContent='🎉 Exact!';fb.style.color='var(--ok)'}else if(t<pTgt){fb.textContent='₹'+(pTgt-t)+' more needed.';fb.style.color='var(--no)'}else{fb.textContent='₹'+(t-pTgt)+' too much.';fb.style.color='var(--no)'}}
+function nwPQ(){var amounts=[3,5,7,10,12,15,20];pTgt=amounts[Math.floor(Math.random()*amounts.length)];pCoins=[];rndrPW();document.getElementById('pTgt').textContent=pTgt;document.getElementById('pFb').textContent=''}
+bldPPal();nwPQ();
 
 </script>
 </body>
