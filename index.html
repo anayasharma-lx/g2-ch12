@@ -1,182 +1,384 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chapter 12 · Money</title>
-<link href="https://fonts.googleapis.com/css2?family=Grandstander:wght@500;600;700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>💰 Money — Grade 8</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,800;9..40,900&family=DM+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--ac:#B45309;--bg:#FDF6EE;--card:#fff;--ink:#1A2E2E;--ink2:#5F7A7A;--ok:#16A34A;--no:#DC2626;--r:20px}
-html,body{width:100%;min-height:100vh;font-family:'Poppins',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
-.hdr{width:100%;position:sticky;top:0;z-index:100;background:var(--ac);box-shadow:0 4px 24px rgba(0,0,0,.15)}
-.hdr-in{max-width:640px;margin:0 auto;padding:14px 20px 0;text-align:center}
-.ch-n{font-family:'Grandstander',cursive;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.65)}
-.ch-t{font-family:'Grandstander',cursive;font-size:clamp(18px,5vw,26px);font-weight:900;color:#fff;line-height:1.2;margin:2px 0 10px;text-shadow:0 2px 8px rgba(0,0,0,.1)}
-.tabs{display:flex;gap:4px;max-width:280px;margin:0 auto;background:rgba(0,0,0,.1);border-radius:14px 14px 0 0;padding:4px 4px 0}
-.tab{flex:1;padding:9px 0;text-align:center;font-family:'Grandstander',cursive;font-size:14px;font-weight:800;cursor:pointer;border-radius:12px 12px 0 0;color:rgba(255,255,255,.6);transition:.2s;user-select:none}
-.tab.on{background:var(--bg);color:var(--ac)}
-.tab:not(.on):hover{color:#fff;background:rgba(255,255,255,.08)}
-.page{max-width:620px;margin:0 auto;padding:14px 14px 60px}
-.pnl{display:none;flex-direction:column;gap:16px}.pnl.on{display:flex}
-.card{background:var(--card);border-radius:var(--r);padding:20px 18px;box-shadow:0 3px 16px rgba(0,0,0,.06);position:relative;overflow:hidden}
-.cb{position:absolute;top:0;left:0;bottom:0;width:5px;border-radius:var(--r) 0 0 var(--r);background:var(--ac)}
-.ct{font-family:'Grandstander',cursive;font-size:15px;font-weight:800;padding-left:14px;margin-bottom:3px;line-height:1.3}
-.cs{font-size:12px;color:var(--ink2);padding-left:14px;margin-bottom:14px;line-height:1.6}
-/* stepper */
-.cr{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
-.cg{display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.03);border-radius:12px;padding:8px 12px;border:1.5px solid rgba(0,0,0,.06)}
-.cl{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;min-width:48px}
-.sb{width:34px;height:34px;border-radius:50%;border:none;font-size:18px;font-weight:900;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.12s;box-shadow:0 2px 6px rgba(0,0,0,.15)}
-.sb:active{transform:scale(.88)}
-.sv{font-family:'Grandstander',cursive;font-size:28px;font-weight:900;min-width:28px;text-align:center}
-/* blocks */
-.bx{background:rgba(0,0,0,.02);border-radius:14px;border:1.5px solid rgba(0,0,0,.06);padding:12px;min-height:60px;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-end;margin-bottom:14px}
-.flat{display:grid;grid-template-columns:repeat(10,8px);gap:1px}.flat-c{width:8px;height:8px;border-radius:1px;opacity:.8}
-.rod{display:flex;flex-direction:column;gap:1px}.rod-c{width:10px;height:10px;border-radius:1px;opacity:.8}
-.units{display:flex;flex-wrap:wrap;gap:2px;max-width:58px;align-self:flex-end}.unit-c{width:10px;height:10px;border-radius:2px;opacity:.8}
-.sep{width:1px;background:#D1D5DB;align-self:stretch;margin:0 3px}
-/* options */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg1:#fddcb5;--bg2:#dff2e0;
+  --card:#fff;--border:#1a1a2e;
+  --ink:#1a1a2e;--ink2:#4a4a5a;--ink3:#9090a0;
+  --teal:#4ecdc4;--orange:#ff6b35;--yellow:#ffd93d;--red:#e63946;--purple:#a78bfa;--green:#2a9d8f;
+  --sans:'DM Sans',system-ui,sans-serif;--mono:'DM Mono',monospace;
+}
+html{background:linear-gradient(135deg,var(--bg1) 0%,#fef6e8 50%,var(--bg2) 100%);min-height:100vh}
+body{font-family:var(--sans);color:var(--ink);min-height:100vh;padding:32px 24px;display:flex;flex-direction:column;align-items:center}
+
+/* PAGE CARD */
+.page-card{background:var(--card);border:2px solid var(--border);border-radius:24px;width:100%;max-width:960px;overflow:hidden}
+
+/* HEADER */
+.card-header{padding:28px 36px 22px}
+.activity-pill{display:inline-flex;align-items:center;gap:6px;background:var(--yellow);border:2px solid var(--border);border-radius:30px;padding:4px 14px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+.activity-pill::before{content:'★';font-size:10px}
+.page-title{font-size:clamp(24px,4vw,40px);font-weight:900;line-height:1.05;display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.t-pill{color:#fff;border:2px solid var(--border);border-radius:12px;padding:3px 16px;font-style:italic;font-size:inherit;display:inline-block}
+.page-desc{font-size:15px;color:var(--ink2);line-height:1.6;max-width:600px}
+.page-desc em{color:var(--red);font-style:italic;font-weight:700}
+
+/* BODY LAYOUTS */
+.two-col{display:grid;grid-template-columns:1fr 280px;border-top:1px dashed #d0d0d8}
+.two-col-wide{display:grid;grid-template-columns:1fr 320px;border-top:1px dashed #d0d0d8}
+.one-col{border-top:1px dashed #d0d0d8}
+.left-col{padding:24px 28px;border-right:1px dashed #d0d0d8;display:flex;flex-direction:column;gap:20px}
+.right-col{padding:20px 18px;display:flex;flex-direction:column;gap:14px}
+.full-col{padding:24px 28px;display:flex;flex-direction:column;gap:20px}
+
+/* SECTION LABELS */
+.sec{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.sec-dot{width:13px;height:13px;border-radius:50%;flex-shrink:0}
+.sec-title{font-size:14px;font-weight:800;color:var(--ink)}
+.sec-rule{flex:1;border:none;border-top:1px dashed #d8d8e0}
+
+/* INFO CARDS (right col) */
+.info-card{background:#fff;border:2px solid var(--border);border-radius:18px;padding:14px 16px}
+.info-card + .info-card{margin-top:0}
+
+/* CONTROLS — sliders */
+.ctrl-block{display:flex;flex-direction:column;gap:5px}
+.ctrl-head{display:flex;justify-content:space-between;align-items:baseline}
+.ctrl-lbl{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--ink3)}
+.ctrl-val{font-family:var(--mono);font-size:24px;font-weight:700}
+input[type=range]{-webkit-appearance:none;width:100%;height:5px;border-radius:3px;background:#e8e8e8;outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;cursor:pointer;border:2px solid var(--border)}
+
+/* TABS / SCENARIO BUTTONS */
+.tab-row{display:flex;gap:8px;flex-wrap:wrap;padding:16px 28px;border-bottom:1px dashed #d0d0d8;background:#fafafa}
+.tab-btn{padding:8px 18px;border:2px solid #d0d0d8;border-radius:30px;background:#fff;font-family:var(--sans);font-size:13px;font-weight:700;color:var(--ink2);cursor:pointer;transition:all .14s}
+.tab-btn:hover{border-color:var(--teal);color:var(--teal)}
+.tab-btn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+.tab-btn.active-orange{background:var(--orange);color:#fff;border-color:var(--orange)}
+
+/* STEP NAV */
+.step-nav{display:flex;align-items:center;gap:12px;padding:14px 28px;border-bottom:1px dashed #d0d0d8;background:#fafafa}
+.step-btn{padding:8px 20px;border:2px solid var(--border);border-radius:30px;font-family:var(--sans);font-size:13px;font-weight:800;cursor:pointer;background:#fff;color:var(--ink2);transition:all .14s}
+.step-btn:hover:not(:disabled){background:#f5f5f5}
+.step-btn:disabled{opacity:.35;cursor:default}
+.step-btn.primary{background:var(--teal);color:#fff;border-color:var(--teal)}
+.step-btn.primary:hover{background:#3ab5ac}
+.step-dots{display:flex;gap:6px}
+.sdot{width:9px;height:9px;border-radius:50%;background:#d8d8e0;transition:all .15s}
+.sdot.done{background:var(--teal)}
+.sdot.cur{background:var(--teal);transform:scale(1.3)}
+.step-lbl{flex:1;font-size:14px;font-weight:700;color:var(--ink)}
+
+/* STEP BANNER */
+.step-banner{padding:14px 28px;background:#fffbe6;border-bottom:1px dashed #d0d0d8;display:flex;align-items:baseline;gap:10px}
+.step-num{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--orange);flex-shrink:0}
+.step-text{font-size:15px;font-weight:700;color:var(--ink);line-height:1.4}
+
+/* CANVAS AREA */
+.canvas-wrap{background:#2d2d44;border-radius:0;overflow:hidden;position:relative}
+canvas{display:block;width:100%;height:auto}
+
+/* FACT / STATS ROWS */
+.fact-row{display:flex;justify-content:space-between;align-items:baseline;padding:7px 0;border-bottom:1px dashed #e8e8e8}
+.fact-row:last-child{border-bottom:none}
+.fact-lbl{font-size:13px;color:var(--ink2)}
+.fact-val{font-family:var(--mono);font-size:16px;font-weight:700}
+
+/* TALLY BUTTONS */
+.tally{display:flex;align-items:center;gap:8px}
+.tally-btn{width:36px;height:36px;border:2px solid var(--border);border-radius:10px;background:#fff;font-size:18px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .12s;color:var(--ink2)}
+.tally-btn:hover{background:var(--teal);color:#fff;border-color:var(--teal)}
+.tally-num{font-family:var(--mono);font-size:28px;font-weight:700;min-width:40px;text-align:center}
+
+/* VERDICT STRIP */
+.verdict-strip{padding:14px 28px;font-size:15px;font-weight:700;border-top:1px dashed #d0d0d8}
+.verdict-ok{background:#e8faf9;color:var(--green)}
+.verdict-fail{background:#fef0ee;color:#c0441e}
+
+/* INSIGHT STRIP */
+.insight-strip{padding:16px 28px;font-size:14px;color:var(--ink2);line-height:1.7;background:#fffbe6;border-top:1px dashed #d0d0d8}
+.insight-strip strong{color:var(--ink);font-weight:700}
+
+/* NUMBER CIRCLES */
+.num-circle{width:26px;height:26px;border-radius:50%;background:var(--yellow);border:2px solid var(--border);display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0}
+
+/* FLOATING SHAPES */
+.shape{position:fixed;pointer-events:none;z-index:-1}
+.sh-circle{width:56px;height:56px;border-radius:50%;background:#ff6b6b;opacity:.65;top:80px;left:calc(50% - 530px)}
+.sh-tri{width:0;height:0;border-left:22px solid transparent;border-right:22px solid transparent;border-bottom:38px solid #4ecdc4;opacity:.65;bottom:180px;right:calc(50% - 530px)}
+.sh-star{font-size:34px;line-height:1;opacity:.55;top:200px;right:calc(50% - 510px)}
+.sh-sq{width:36px;height:36px;border-radius:8px;background:#a78bfa;opacity:.55;bottom:90px;left:calc(50% - 510px);transform:rotate(15deg)}
+
+@media(max-width:740px){
+  body{padding:12px}
+  .two-col,.two-col-wide{grid-template-columns:1fr}
+  .left-col{border-right:none;border-bottom:1px dashed #d0d0d8}
+  .card-header,.full-col,.left-col,.right-col{padding-left:18px;padding-right:18px}
+  .tab-row,.step-nav,.step-banner,.verdict-strip,.insight-strip{padding-left:18px;padding-right:18px}
+}
+
+/* LEARN */
+.coin-section-lbl{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--ink3);margin-bottom:8px}
+.coin-row-flex{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;padding:12px;background:#f8f8f8;border-radius:12px;border:1.5px solid #e0e0e0}
+
+/* SHOP LAYOUT */
+.shop-layout{display:grid;grid-template-columns:1fr 260px;border-top:1px dashed #d0d0d8;min-height:460px}
+.shop-left{padding:16px;border-right:1px dashed #d0d0d8;display:flex;flex-direction:column;gap:14px}
+.shop-right{padding:14px;display:flex;flex-direction:column;gap:12px}
+.sec-lbl{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--ink3);margin-bottom:8px}
+
+/* SHELF */
+#shelf{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.item-card{position:relative;background:#fff;border:2px solid #e0e0e0;border-radius:14px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .15s;user-select:none}
+.item-card:hover{border-color:var(--teal);background:#e8faf9;transform:translateY(-2px)}
+.item-card.in-cart{border-color:var(--teal);background:#e8faf9}
+.item-badge{position:absolute;top:6px;right:6px;background:var(--teal);color:#fff;
+  border-radius:50%;width:20px;height:20px;font-size:11px;font-weight:900;
+  font-family:'DM Mono',monospace;align-items:center;justify-content:center;transition:transform .2s}
+.item-emoji{font-size:28px;line-height:1.2}
+.item-name{font-family:'DM Sans',system-ui;font-size:11px;font-weight:800;color:var(--ink);margin-top:2px}
+.item-price{font-family:'DM Mono',monospace;font-size:14px;font-weight:700;color:var(--orange);margin-top:2px}
+
+/* CART */
+.cart-box{background:#f8f8f8;border-radius:12px;border:1.5px solid #e0e0e0;padding:10px;min-height:80px}
+.cart-empty{font-size:13px;color:var(--ink3);text-align:center;padding:16px 0;font-family:'DM Sans',system-ui}
+.cart-row{display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px dashed #e0e0e0}
+.cart-row:last-child{border-bottom:none}
+.cr-emoji{font-size:16px}
+.cr-name{font-size:12px;font-weight:700;flex:1;color:var(--ink)}
+.cr-price{font-family:'DM Mono',monospace;font-size:13px;font-weight:700;color:var(--orange)}
+.cr-remove{background:none;border:none;color:var(--red);cursor:pointer;font-size:14px;padding:0 4px}
+.cart-total-row{display:flex;justify-content:space-between;align-items:center;
+  padding:8px 0;border-top:2px solid #d0d0d8;margin-top:4px}
+.cart-total-lbl{font-size:12px;font-weight:800;color:var(--ink)}
+.cart-total-val{font-family:'DM Mono',monospace;font-size:22px;font-weight:700;color:var(--orange)}
+
+/* WALLET */
+.wallet-box{background:#fffbe6;border-radius:12px;border:2px solid var(--yellow);padding:10px}
+.wallet-coins-row{display:flex;flex-wrap:wrap;gap:6px;min-height:36px}
+.wallet-total-row{display:flex;justify-content:space-between;align-items:center;
+  margin-top:8px;padding-top:8px;border-top:1px dashed #d0d0d8}
+.wallet-lbl{font-size:11px;font-weight:800;color:var(--ink3)}
+.wallet-val{font-family:'DM Mono',monospace;font-size:20px;font-weight:700;color:var(--ok)}
+
+/* PROGRESS */
+.prog-wrap{height:10px;background:#e0e0e0;border-radius:5px;overflow:hidden}
+.prog-fill{height:100%;border-radius:5px;transition:width .3s,background .3s}
+.shop-fb{font-size:13px;font-weight:800;min-height:18px;text-align:center;font-family:'DM Sans',system-ui}
+
+/* PAY BTN */
+.pay-btn{width:100%;padding:12px;background:var(--teal);color:#fff;
+  border:2px solid var(--border);border-radius:20px;font-family:'DM Sans',system-ui;
+  font-size:16px;font-weight:900;cursor:pointer;transition:all .14s}
+.pay-btn:hover:not(:disabled){transform:translateY(-1px);background:#3ab5ac}
+.pay-btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* SUCCESS OVERLAY */
+#successOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;
+  align-items:center;justify-content:center}
+.receipt-card{background:#fff;border-radius:22px;padding:24px;max-width:320px;width:90%;
+  border:3px solid var(--border);text-align:center;position:relative;overflow:hidden}
+.rc-title{font-family:'DM Sans',system-ui;font-size:20px;font-weight:900;color:var(--ok);margin-bottom:12px}
+.rc-item-row{display:flex;justify-content:space-between;font-size:14px;font-weight:700;
+  padding:4px 0;border-bottom:1px dashed #e0e0e0;font-family:'DM Sans',system-ui}
+.rc-total{font-family:'DM Mono',monospace;font-size:26px;font-weight:700;color:var(--orange);margin:10px 0 4px}
+.rc-close{padding:10px 28px;background:var(--teal);color:#fff;border:2px solid var(--border);
+  border-radius:20px;font-family:'DM Sans',system-ui;font-size:15px;font-weight:900;cursor:pointer;margin-top:8px}
+#confettiArea{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+
+/* PRACTICE */
+.q-card{padding:14px;background:#f8f8f8;border-radius:14px;border:1.5px solid #e0e0e0;margin-bottom:10px}
+.q-lbl{font-size:13px;font-weight:800;color:var(--ink);margin-bottom:10px;font-family:'DM Sans',system-ui}
 .opts{display:flex;gap:8px;flex-wrap:wrap}
-.opt{font-family:'Grandstander',cursive;font-size:22px;font-weight:800;min-width:72px;height:54px;border-radius:16px;border:2.5px solid rgba(0,0,0,.08);background:#fff;cursor:pointer;color:var(--ink);display:flex;align-items:center;justify-content:center;transition:.15s;box-shadow:0 2px 8px rgba(0,0,0,.05)}
-.opt:hover{border-color:var(--ac);transform:translateY(-2px)}
-.opt.ok{background:#DCFCE7;border-color:var(--ok);color:#15803D;animation:pop .3s}
-.opt.no{background:#FEE2E2;border-color:var(--no);color:var(--no);animation:shk .35s}
-@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.08)}100%{transform:scale(1)}}
-@keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
-.fb{font-family:'Grandstander',cursive;font-size:14px;font-weight:700;min-height:20px;margin-top:10px;text-align:center}
-.nbtn{font-family:'Grandstander',cursive;font-size:14px;font-weight:800;padding:10px 24px;border-radius:14px;border:none;background:var(--ac);color:#fff;cursor:pointer;margin-top:12px;box-shadow:0 3px 10px rgba(0,0,0,.12);transition:.15s}
-.nbtn:hover{transform:translateY(-1px);opacity:.9}
-.btn{font-family:'Grandstander',cursive;font-size:14px;font-weight:800;padding:10px 20px;border-radius:14px;border:none;cursor:pointer;transition:.15s;box-shadow:0 2px 8px rgba(0,0,0,.1)}
-.btn:hover{transform:translateY(-1px)}
-.btn-p{background:var(--ac);color:#fff}
-.btn-g{background:#fff;color:var(--ink2);border:1.5px solid rgba(0,0,0,.1)}
-.btn-g:hover{border-color:var(--ac);color:var(--ac)}
-.chal{background:rgba(0,0,0,.02);border-radius:16px;padding:14px;border:1.5px dashed rgba(0,0,0,.1);margin-top:10px}
-.chal-q{font-family:'Grandstander',cursive;font-size:14px;font-weight:800;margin-bottom:10px}
-.chal-q b{color:var(--ac);font-size:22px}
-canvas{display:block;border-radius:10px}
-/* drag & tap shared */
-.tappable{cursor:pointer;user-select:none;transition:transform .15s}
-.tappable:hover{transform:scale(1.08)}
-.tappable:active{transform:scale(.92)}
-/* misc */
-.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.pill{display:inline-block;font-family:'Grandstander',cursive;font-size:14px;font-weight:800;padding:6px 18px;border-radius:30px}
-.big{font-family:'Grandstander',cursive;font-weight:900;line-height:1;text-align:center}
+.opt{padding:8px 18px;border:2px solid #d0d0d8;border-radius:20px;background:#fff;
+  font-family:'DM Mono',monospace;font-size:14px;font-weight:800;cursor:pointer;transition:all .12s}
+.opt.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.opt.no{background:var(--no);color:#fff;border-color:var(--no)}
+.fb{font-size:13px;font-weight:800;min-height:20px;margin-top:6px;font-family:'DM Sans',system-ui}
+
+/* PALETTE (coin picker) */
+.palette-wrap{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+@media(max-width:640px){
+  .shop-layout{grid-template-columns:1fr}
+  .shop-left{border-right:none;border-bottom:1px dashed #d0d0d8}
+  #shelf{grid-template-columns:repeat(3,1fr)}
+}
+
+.page-card{max-width:960px}
 </style>
 </head>
 <body>
-<div class="hdr"><div class="hdr-in">
-  <div class="ch-n">Chapter 12</div>
-  <div class="ch-t">Money</div>
-  <div class="tabs">
-    <div class="tab on" onclick="sw('learn')">Learn</div>
-    <div class="tab" onclick="sw('practice')">Practice</div>
+<div class="shape sh-circle"></div>
+<div class="shape sh-tri"></div>
+<div class="shape sh-star">★</div>
+<div class="shape sh-sq"></div>
+<div class="page-card">
+  <div class="card-header">
+    <div class="activity-pill">Ch 12 · Grade 2 · Money</div>
+    <div class="page-title">💰 <span class="t-pill" style="background:var(--orange)">Money</span></div>
+    <p class="page-desc">Learn Indian coins and notes. Add <em>multiple items</em> to your cart and pay for them all at once!</p>
   </div>
-</div></div>
-<div class="page">
 
-<div class="pnl on" id="p-learn">
-  <div class="card"><div class="cb"></div>
-    <div class="ct">The coin shop</div>
-    <div class="cs">Pick an item, build the exact price with coins, then tap Pay!</div>
+  <!-- SUCCESS OVERLAY -->
+  <div id="successOverlay">
+    <div class="receipt-card">
+      <div id="confettiArea"></div>
+      <div class="rc-title">🎉 Purchase complete!</div>
+      <div id="rcItems" style="margin-bottom:10px;text-align:left"></div>
+      <div class="rc-total">Total: ₹<span id="rcTotal"></span></div>
+      <button class="rc-close" onclick="closeSuccess()">Shop again 🛍️</button>
+    </div>
+  </div>
 
-    <div id="successOverlay" style="display:none;position:fixed;inset:0;z-index:999;align-items:center;justify-content:center;background:rgba(0,0,0,.45);backdrop-filter:blur(4px)">
-      <div id="receiptCard" style="background:#fff;border-radius:28px;padding:32px 28px;max-width:320px;width:90%;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.25);position:relative;overflow:hidden">
-        <div style="font-size:72px;margin-bottom:6px" id="rcEmoji">🍎</div>
-        <div style="font-family:Grandstander,cursive;font-size:22px;font-weight:900;color:var(--ok);margin-bottom:3px">🎉 Purchased!</div>
-        <div style="font-family:Grandstander,cursive;font-size:18px;font-weight:800;color:var(--ink);margin-bottom:16px" id="rcName">Apple</div>
-        <div style="background:rgba(0,0,0,.03);border-radius:14px;padding:14px;margin-bottom:16px;text-align:left;border:1.5px solid rgba(0,0,0,.06)">
-          <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2);margin-bottom:8px">Receipt</div>
-          <div id="rcCoins" style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px"></div>
-          <div style="display:flex;justify-content:space-between;align-items:center;border-top:1.5px dashed rgba(0,0,0,.1);padding-top:10px">
-            <span style="font-size:13px;font-weight:700;color:var(--ink2)">Total paid</span>
-            <span style="font-family:Grandstander,cursive;font-size:22px;font-weight:900;color:var(--ac)">₹<span id="rcTotal">0</span></span>
+  <!-- TABS -->
+  <div class="tab-row">
+    <button class="tab-btn on" data-tab="learn" onclick="sw('learn')">📚 Learn</button>
+    <button class="tab-btn" data-tab="shop" onclick="sw('shop')">🛒 Shop</button>
+    <button class="tab-btn" data-tab="practice" onclick="sw('practice')">⭐ Practice</button>
+  </div>
+
+  <!-- LEARN -->
+  <div id="p-learn" style="padding:16px 20px;display:flex;flex-direction:column;gap:14px">
+    <div>
+      <div class="coin-section-lbl">Coins</div>
+      <div class="coin-row-flex" id="learnCoins"></div>
+    </div>
+    <div>
+      <div class="coin-section-lbl">Notes</div>
+      <div class="coin-row-flex" id="learnNotes"></div>
+    </div>
+    <div style="padding:12px 14px;background:#e8faf9;border-radius:12px;border:2px solid var(--teal)">
+      <div style="font-size:14px;font-weight:800;color:var(--teal);margin-bottom:4px">Remember!</div>
+      <div style="font-size:13px;font-weight:600;color:var(--ink2);line-height:1.7">
+        100 paise = ₹1 &nbsp;·&nbsp; ₹5 = five rupees &nbsp;·&nbsp; ₹10 = ten rupees<br>
+        Use ₹ (Rupee sign) to show Indian money.
+      </div>
+    </div>
+  </div>
+
+  <!-- SHOP (multi-item cart) -->
+  <div id="p-shop" style="display:none">
+    <div class="shop-layout">
+      <div class="shop-left">
+        <div>
+          <div class="sec-lbl">🏪 Tap items to add to cart</div>
+          <div id="shelf"></div>
+        </div>
+        <div>
+          <div class="sec-lbl">💳 Add coins &amp; notes to wallet</div>
+          <div class="wallet-box">
+            <div class="palette-wrap" id="palette"></div>
+            <div style="font-size:10px;color:var(--ink3);margin-top:6px">Tap a coin or note to add it</div>
           </div>
         </div>
-        <div id="confettiArea" style="position:absolute;inset:0;pointer-events:none;overflow:hidden"></div>
-        <button onclick="closeSuccess()" style="font-family:Grandstander,cursive;font-size:16px;font-weight:800;padding:13px 30px;border-radius:16px;border:none;background:var(--ac);color:#fff;cursor:pointer;width:100%;box-shadow:0 4px 12px rgba(0,0,0,.15)">Shop again! →</button>
-      </div>
-    </div>
-
-    <!-- 6 items in one row -->
-    <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2);margin-bottom:8px">Choose an item</div>
-    <div id="shelf" style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px"></div>
-
-    <div id="selDisp" style="display:none;background:rgba(0,0,0,.02);border-radius:14px;padding:12px 16px;border:1.5px solid rgba(0,0,0,.06);margin-bottom:14px;align-items:center;gap:14px">
-      <div style="text-align:center;flex-shrink:0">
-        <div style="font-size:40px" id="selEmoji"></div>
-        <div style="font-family:Grandstander,cursive;font-size:13px;font-weight:800" id="selName"></div>
-      </div>
-      <div>
-        <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2)">Price</div>
-        <div class="big" style="font-size:40px;color:var(--ac)">₹<span id="selPrice">0</span></div>
-      </div>
-    </div>
-
-    <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2);margin-bottom:8px">Tap to add coins</div>
-    <div id="palette" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px"></div>
-
-    <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2);margin-bottom:6px">Your wallet — tap a coin to remove</div>
-    <div id="wallet" style="min-height:52px;padding:10px;background:rgba(0,0,0,.02);border-radius:12px;border:1.5px dashed rgba(0,0,0,.1);display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px"></div>
-
-    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px">
-      <div class="big" style="font-size:32px;color:var(--ac)">₹<span id="wTot">0</span></div>
-      <div style="flex:1;min-width:80px">
-        <div style="height:10px;background:rgba(0,0,0,.06);border-radius:10px;overflow:hidden">
-          <div id="pgBar" style="height:100%;background:var(--ac);border-radius:10px;width:0%;transition:.35s"></div>
+        <div style="display:flex;gap:8px">
+          <button onclick="clearWallet()" style="font-size:12px;font-weight:700;color:var(--red);background:none;border:1.5px solid var(--red);border-radius:20px;padding:5px 12px;cursor:pointer">Clear wallet</button>
+          <button onclick="clearCart()" style="font-size:12px;font-weight:700;color:var(--ink3);background:none;border:1.5px solid #d0d0d8;border-radius:20px;padding:5px 12px;cursor:pointer">Clear cart</button>
         </div>
-        <div style="font-size:11px;font-weight:700;color:var(--ink2);margin-top:3px" id="pgLbl">Select an item first</div>
+      </div>
+
+      <div class="shop-right">
+        <!-- CART -->
+        <div>
+          <div class="sec-lbl">🛒 Your cart</div>
+          <div class="cart-box" id="cartBox">
+            <div class="cart-empty">Tap items to add! 👆</div>
+          </div>
+          <div class="cart-total-row" id="cartTotalRow" style="display:none">
+            <span class="cart-total-lbl">Cart total</span>
+            <span class="cart-total-val">₹<span id="cartTotal">0</span></span>
+          </div>
+        </div>
+
+        <!-- WALLET TOTAL -->
+        <div class="wallet-box">
+          <div class="wallet-coins-row" id="walletCoins"></div>
+          <div class="wallet-total-row">
+            <span class="wallet-lbl">In wallet</span>
+            <span class="wallet-val">₹<span id="wTot">0</span></span>
+          </div>
+        </div>
+
+        <!-- PROGRESS -->
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700;color:var(--ink3);margin-bottom:4px">
+            <span>Wallet: ₹<span id="pWal">0</span></span>
+            <span>Need: ₹<span id="pTot">0</span></span>
+          </div>
+          <div class="prog-wrap"><div class="prog-fill" id="pgBar" style="width:0%;background:var(--teal)"></div></div>
+        </div>
+        <div class="shop-fb" id="shopFb"></div>
+        <button class="pay-btn" id="payBtn" onclick="payNow()" disabled>Pay ₹<span id="payAmt">0</span></button>
       </div>
     </div>
-    <div class="row">
-      <button class="btn btn-p" onclick="payNow()">Pay ₹</button>
-      <button class="btn btn-g" onclick="clearW()">Clear ↻</button>
-    </div>
-    <div class="fb" id="shopFb"></div>
   </div>
-</div>
 
-<div class="pnl" id="p-practice">
-  <div class="card"><div class="cb"></div>
-    <div class="ct">Make the exact amount</div>
-    <div class="cs">Add coins that total exactly the target amount.</div>
-    <div style="text-align:center;background:rgba(0,0,0,.02);border-radius:14px;padding:14px;border:1.5px solid rgba(0,0,0,.06);margin-bottom:14px">
-      <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2)">Make exactly</div>
-      <div class="big" style="font-size:52px;color:var(--ac)">₹<span id="pTgt">0</span></div>
+  <!-- PRACTICE -->
+  <div id="p-practice" style="display:none;padding:16px 20px;flex-direction:column;gap:0">
+    <div class="q-card">
+      <div class="q-lbl">Make exactly ₹<span id="pTgt"></span> using the coins below:</div>
+      <div class="opts" id="pPal"></div>
+      <div class="fb" id="pFb"></div>
     </div>
-    <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2);margin-bottom:8px">Add coins</div>
-    <div id="pPal" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px"></div>
-    <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink2);margin-bottom:6px">Your selection — tap to remove</div>
-    <div id="pWal" style="min-height:48px;padding:10px;background:rgba(0,0,0,.02);border-radius:12px;border:1.5px dashed rgba(0,0,0,.1);display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px"></div>
-    <div style="font-family:Grandstander,cursive;font-size:24px;font-weight:900;color:var(--ac);margin-bottom:10px">₹<span id="pTot">0</span></div>
-    <div class="row">
-      <button class="btn btn-p" onclick="ckPay()">Check ✓</button>
-      <button class="btn btn-g" onclick="nwPQ()">New amount ↻</button>
+    <div class="q-card">
+      <div class="q-lbl" id="q2txt"></div>
+      <div class="opts" id="p2Pal"></div>
+      <div class="fb" id="p2Fb"></div>
     </div>
-    <div class="fb" id="pFb"></div>
   </div>
-</div>
 
 </div>
 <script>
-function sw(n){document.querySelectorAll('.tab').forEach(function(t){t.classList.toggle('on',t.textContent.toLowerCase()===n)});document.querySelectorAll('.pnl').forEach(function(p){var a=p.id==='p-'+n;p.classList.toggle('on',a);p.style.display=a?'flex':'none'})}
-document.getElementById('p-practice').style.display='none';
-function pool4(ans,lo,hi){var s=new Set([ans]);var i=0;while(s.size<4&&i<50){i++;var w=ans+Math.round(Math.random()*8-4);if(w>=lo&&w<=hi&&w!==ans)s.add(w)}return[...s].sort(function(){return Math.random()-.5})}
-function mkOpts(cid,items,correct,fid){var c=document.getElementById(cid);c.innerHTML='';items.forEach(function(n){var b=document.createElement('button');b.className='opt';b.textContent=n;b.onclick=function(){c.querySelectorAll('.opt').forEach(function(x){x.onclick=null});var fb=document.getElementById(fid);if(String(n)===String(correct)){b.classList.add('ok');fb.textContent='🎉 Correct!';fb.style.color='var(--ok)'}else{b.classList.add('no');fb.textContent='The answer is '+correct+'.';fb.style.color='var(--no)';c.querySelectorAll('.opt').forEach(function(x){if(String(x.textContent)===String(correct))x.classList.add('ok')})}};c.appendChild(b)})}
 
-var COINS=[{v:1,l:'₹1',r:18,bg:'#D4D4D8',fg:'#3F3F46',note:false},
-           {v:2,l:'₹2',r:20,bg:'#D4D4D8',fg:'#3F3F46',note:false},
-           {v:5,l:'₹5',r:22,bg:'#FDE68A',fg:'#92400E',note:false},
-           {v:10,l:'₹10',r:24,bg:'#FDE68A',fg:'#92400E',note:false},
-           {v:20,l:'₹20',r:0,bg:'#BBF7D0',fg:'#166534',note:true},
-           {v:50,l:'₹50',r:0,bg:'#BFDBFE',fg:'#1E40AF',note:true},
-           {v:100,l:'₹100',r:0,bg:'#E9D5FF',fg:'#6B21A8',note:true}];
+function sw(n){
+  ['learn','shop','practice'].forEach(function(id){
+    var p=document.getElementById('p-'+id);
+    p.style.display=id===n?'':'none';
+  });
+  document.querySelectorAll('.tab-btn').forEach(function(t){
+    t.classList.toggle('on', t.dataset.tab===n);
+  });
+}
 
-/* Exactly 6 items — one neat row */
-var ITEMS=[{n:'Pencil',e:'✏️',p:5},{n:'Eraser',e:'🧽',p:3},{n:'Candy',e:'🍬',p:2},{n:'Juice',e:'🧃',p:10},{n:'Banana',e:'🍌',p:8},{n:'Notebook',e:'📓',p:20}];
+/* ── COINS & ITEMS ── */
+var COINS=[
+  {v:1, l:'₹1', r:18,bg:'#D4D4D8',fg:'#3F3F46',note:false},
+  {v:2, l:'₹2', r:20,bg:'#D4D4D8',fg:'#3F3F46',note:false},
+  {v:5, l:'₹5', r:22,bg:'#FDE68A',fg:'#92400E',note:false},
+  {v:10,l:'₹10',r:24,bg:'#FDE68A',fg:'#92400E',note:false},
+  {v:20,l:'₹20',r:0, bg:'#BBF7D0',fg:'#166534',note:true},
+  {v:50,l:'₹50',r:0, bg:'#BFDBFE',fg:'#1E40AF',note:true},
+  {v:100,l:'₹100',r:0,bg:'#E9D5FF',fg:'#6B21A8',note:true}
+];
+var ITEMS=[
+  {n:'Pencil',  e:'✏️',p:5 },
+  {n:'Eraser',  e:'🧽',p:3 },
+  {n:'Candy',   e:'🍬',p:2 },
+  {n:'Juice',   e:'🧃',p:10},
+  {n:'Banana',  e:'🍌',p:8 },
+  {n:'Notebook',e:'📓',p:20}
+];
 
+/* ── cart: itemIndex → qty ── */
+var cart={};
+var walletCoins=[];
+
+function cartTotal(){
+  return Object.keys(cart).reduce(function(s,i){return s+cart[i]*ITEMS[i].p},0);
+}
+function walletTotal(){
+  return walletCoins.reduce(function(a,b){return a+b},0);
+}
+
+/* ── coin element factory ── */
 function mkCoinEl(coin,onClick){
   var d=document.createElement('div');
   if(coin.note){
@@ -192,79 +394,180 @@ function mkCoinEl(coin,onClick){
   return d;
 }
 
-var CONFETTI_COLS=['#D97706','#16A34A','#2563EB','#DC2626','#7C3AED','#DB2777'];
-function showSuccess(item,coins){
-  var ov=document.getElementById('successOverlay');ov.style.display='flex';
-  document.getElementById('rcEmoji').textContent=item.e;
-  document.getElementById('rcName').textContent=item.n;
-  document.getElementById('rcTotal').textContent=item.p;
-  var cc=document.getElementById('rcCoins');cc.innerHTML='';
-  var tally={};coins.forEach(function(v){tally[v]=(tally[v]||0)+1});
-  Object.keys(tally).sort(function(a,b){return b-a}).forEach(function(v){
-    var c=COINS.find(function(x){return x.v===parseInt(v)});if(!c)return;
-    var row=document.createElement('div');row.style.cssText='display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px';
-    var sm=document.createElement('div');sm.style.cssText='width:30px;height:30px;border-radius:50%;background:'+c.bg+';color:'+c.fg+';display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;font-family:Grandstander,cursive;border:1.5px solid '+c.fg+'44;flex-shrink:0';
-    if(c.note){sm.style.width='44px';sm.style.borderRadius='5px';sm.style.height='24px'}
-    sm.textContent=c.l;row.appendChild(sm);
-    row.appendChild(document.createTextNode('× '+tally[v]+' = ₹'+(parseInt(v)*tally[v])));
-    cc.appendChild(row);
-  });
-  var ca=document.getElementById('confettiArea');ca.innerHTML='';
-  for(var i=0;i<28;i++){var c=document.createElement('div');var sz=5+Math.random()*8;c.style.cssText='position:absolute;width:'+sz+'px;height:'+(sz*1.6)+'px;border-radius:2px;background:'+CONFETTI_COLS[Math.floor(Math.random()*CONFETTI_COLS.length)]+';left:'+Math.random()*100+'%;top:-10px;animation:cfall '+(1.2+Math.random()*1.2)+'s linear '+(Math.random()*.5)+'s forwards;opacity:.9';ca.appendChild(c)}
-  if(!document.getElementById('confettiKF')){var st=document.createElement('style');st.id='confettiKF';st.textContent='@keyframes cfall{to{transform:translateY(450px) rotate(540deg);opacity:0}}';document.head.appendChild(st)}
-}
-function closeSuccess(){document.getElementById('successOverlay').style.display='none';walletCoins=[];selItem=null;rndrW();updPg();upShelf();document.getElementById('shopFb').textContent=''}
-
-var selItem=null,walletCoins=[];
+/* ── SHELF: tap to add to cart (qty accumulates) ── */
 function bldShelf(){
   var el=document.getElementById('shelf');el.innerHTML='';
   ITEMS.forEach(function(item,i){
-    var d=document.createElement('div');
-    d.style.cssText='display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 8px;background:#fff;border-radius:14px;border:2px solid rgba(0,0,0,.07);cursor:pointer;transition:.15s;min-width:72px;text-align:center;user-select:none;flex-shrink:0';
-    d.innerHTML='<span style="font-size:28px">'+item.e+'</span><span style="font-size:10px;font-weight:700;color:var(--ink2)">'+item.n+'</span><span style="font-family:Grandstander,cursive;font-size:14px;font-weight:900;color:var(--ac)">₹'+item.p+'</span>';
-    d.onmouseenter=function(){if(selItem!==i)d.style.borderColor='rgba(0,0,0,.15)'};
-    d.onmouseleave=function(){d.style.borderColor=selItem===i?'var(--ac)':'rgba(0,0,0,.07)'};
-    d.onclick=function(){selItem=i;walletCoins=[];rndrW();upShelf();updPg();document.getElementById('shopFb').textContent=''};
+    var d=document.createElement('div');d.className='item-card';d.id='item-card-'+i;
+    d.innerHTML='<div class="item-badge" id="item-badge-'+i+'" style="display:none">1</div>'
+      +'<div class="item-emoji">'+item.e+'</div>'
+      +'<div class="item-name">'+item.n+'</div>'
+      +'<div class="item-price">₹'+item.p+'</div>';
+    d.onclick=function(){
+      cart[i]=(cart[i]||0)+1;
+      renderCart();renderProgress();
+      // animate badge
+      var badge=document.getElementById('item-badge-'+i);
+      badge.textContent=cart[i];badge.style.display='flex';
+      d.classList.add('in-cart');
+      badge.style.transform='scale(1.4)';
+      setTimeout(function(){badge.style.transform='';},200);
+    };
     el.appendChild(d);
   });
 }
-function upShelf(){
-  document.querySelectorAll('#shelf>div').forEach(function(d,i){d.style.borderColor=i===selItem?'var(--ac)':'rgba(0,0,0,.07)';d.style.background=i===selItem?'#FFFBEB':'#fff';d.style.transform=i===selItem?'scale(1.05)':''});
-  if(selItem!==null){var it=ITEMS[selItem];var sd=document.getElementById('selDisp');sd.style.display='flex';document.getElementById('selEmoji').textContent=it.e;document.getElementById('selName').textContent=it.n;document.getElementById('selPrice').textContent=it.p}
-}
-function bldPal(){var el=document.getElementById('palette');el.innerHTML='';COINS.forEach(function(c){el.appendChild(mkCoinEl(c,function(coin){walletCoins.push(coin.v);rndrW();updPg()}))})}
-function rndrW(){
-  var el=document.getElementById('wallet');el.innerHTML='';
-  walletCoins.forEach(function(v,i){var c=COINS.find(function(x){return x.v===v});if(c){var d=mkCoinEl(c,function(){walletCoins.splice(i,1);rndrW();updPg()});el.appendChild(d)}});
-  document.getElementById('wTot').textContent=walletCoins.reduce(function(a,b){return a+b},0);
-}
-function updPg(){
-  var t=walletCoins.reduce(function(a,b){return a+b},0);
-  if(selItem===null){document.getElementById('pgLbl').textContent='Select an item first';document.getElementById('pgBar').style.width='0%';return}
-  var price=ITEMS[selItem].p;var pct=Math.min(t/price*100,100);
-  var bar=document.getElementById('pgBar');bar.style.width=pct+'%';bar.style.background=t===price?'#16A34A':t>price?'#DC2626':'var(--ac)';
-  var lbl=document.getElementById('pgLbl');
-  if(t===price){lbl.textContent='✓ Exact! Ready to pay';lbl.style.color='#16A34A'}
-  else if(t<price){lbl.textContent='₹'+(price-t)+' more needed';lbl.style.color='var(--ink2)'}
-  else{lbl.textContent='₹'+(t-price)+' too much';lbl.style.color='#DC2626'}
-}
-function clearW(){walletCoins=[];rndrW();updPg();document.getElementById('shopFb').textContent=''}
-function payNow(){
-  var t=walletCoins.reduce(function(a,b){return a+b},0);var fb=document.getElementById('shopFb');
-  if(selItem===null){fb.textContent='Pick an item first!';fb.style.color='var(--no)';return}
-  var price=ITEMS[selItem].p;
-  if(t===price)showSuccess(ITEMS[selItem],walletCoins.slice());
-  else if(t<price){fb.textContent='₹'+(price-t)+' more needed.';fb.style.color='var(--no)'}
-  else{fb.textContent='₹'+(t-price)+' too much! Remove some coins.';fb.style.color='var(--no)'}
-}
-bldShelf();bldPal();rndrW();
 
-var pTgt=0,pCoins=[];
-function bldPPal(){var el=document.getElementById('pPal');el.innerHTML='';COINS.forEach(function(c){el.appendChild(mkCoinEl(c,function(coin){pCoins.push(coin.v);rndrPW()}))})}
-function rndrPW(){var el=document.getElementById('pWal');el.innerHTML='';pCoins.forEach(function(v,i){var c=COINS.find(function(x){return x.v===v});if(c){var d=mkCoinEl(c,function(){pCoins.splice(i,1);rndrPW()});el.appendChild(d)}});document.getElementById('pTot').textContent=pCoins.reduce(function(a,b){return a+b},0)}
-function ckPay(){var t=pCoins.reduce(function(a,b){return a+b},0);var fb=document.getElementById('pFb');if(t===pTgt){fb.textContent='🎉 Exact!';fb.style.color='var(--ok)'}else if(t<pTgt){fb.textContent='₹'+(pTgt-t)+' more needed.';fb.style.color='var(--no)'}else{fb.textContent='₹'+(t-pTgt)+' too much.';fb.style.color='var(--no)'}}
-function nwPQ(){var amounts=[3,5,7,10,12,15,20];pTgt=amounts[Math.floor(Math.random()*amounts.length)];pCoins=[];rndrPW();document.getElementById('pTgt').textContent=pTgt;document.getElementById('pFb').textContent=''}
-bldPPal();nwPQ();
+/* ── CART panel ── */
+function renderCart(){
+  var box=document.getElementById('cartBox');
+  box.innerHTML='';
+  var tot=cartTotal();
+  var keys=Object.keys(cart).filter(function(k){return cart[k]>0});
+  if(!keys.length){
+    box.innerHTML='<div class="cart-empty">Tap items to add! 👆</div>';
+    document.getElementById('cartTotalRow').style.display='none';
+  } else {
+    keys.forEach(function(k){
+      var item=ITEMS[k], qty=cart[k];
+      var row=document.createElement('div');row.className='cart-row';
+      row.innerHTML='<span class="cr-emoji">'+item.e+'</span>'
+        +'<span class="cr-name">'+item.n+(qty>1?' ×'+qty:'')+'</span>'
+        +'<span class="cr-price">₹'+(item.p*qty)+'</span>'
+        +'<button class="cr-remove" onclick="removeFromCart('+k+')">✕</button>';
+      box.appendChild(row);
+    });
+    document.getElementById('cartTotalRow').style.display='flex';
+    document.getElementById('cartTotal').textContent=tot;
+  }
+  document.getElementById('payAmt').textContent=tot;
+}
+
+function removeFromCart(i){
+  if(cart[i]>1){cart[i]--;}else{delete cart[i];}
+  // update badge
+  var badge=document.getElementById('item-badge-'+i);
+  var card=document.getElementById('item-card-'+i);
+  if(cart[i]){badge.textContent=cart[i];}else{badge.style.display='none';card.classList.remove('in-cart');}
+  renderCart();renderProgress();
+}
+
+function clearCart(){
+  cart={};
+  Object.keys(ITEMS).forEach(function(_,i){
+    var b=document.getElementById('item-badge-'+i);if(b)b.style.display='none';
+    var c=document.getElementById('item-card-'+i);if(c)c.classList.remove('in-cart');
+  });
+  renderCart();renderProgress();document.getElementById('shopFb').textContent='';
+}
+
+/* ── WALLET ── */
+function bldPal(){
+  var el=document.getElementById('palette');el.innerHTML='';
+  COINS.forEach(function(c){el.appendChild(mkCoinEl(c,function(coin){walletCoins.push(coin.v);renderWallet();renderProgress()}))});
+}
+
+function renderWallet(){
+  var el=document.getElementById('walletCoins');el.innerHTML='';
+  var tally={};walletCoins.forEach(function(v){tally[v]=(tally[v]||0)+1});
+  Object.keys(tally).sort(function(a,b){return b-a}).forEach(function(v){
+    var coin=COINS.find(function(c){return c.v===parseInt(v)});if(!coin)return;
+    var wrap=document.createElement('div');wrap.style.cssText='display:flex;align-items:center;gap:3px';
+    var el2=mkCoinEl(coin,function(){});el2.style.cursor='default';el2.onmouseenter=el2.onmouseleave=null;
+    var cnt=document.createElement('span');
+    cnt.style.cssText='font-size:11px;font-weight:800;color:var(--ink3);font-family:"DM Mono",monospace';
+    cnt.textContent='×'+tally[v];
+    wrap.appendChild(el2);wrap.appendChild(cnt);el.appendChild(wrap);
+  });
+  document.getElementById('wTot').textContent=walletTotal();
+}
+
+function clearWallet(){walletCoins=[];renderWallet();renderProgress();document.getElementById('shopFb').textContent=''}
+
+/* ── PROGRESS ── */
+function renderProgress(){
+  var wt=walletTotal(),ct=cartTotal();
+  document.getElementById('pWal').textContent=wt;
+  document.getElementById('pTot').textContent=ct;
+  var bar=document.getElementById('pgBar');
+  var pct=ct===0?0:Math.min(100,Math.round(wt/ct*100));
+  bar.style.width=pct+'%';
+  bar.style.background=wt>=ct&&ct>0?'#16A34A':'var(--teal)';
+  var fb=document.getElementById('shopFb');
+  var payBtn=document.getElementById('payBtn');
+  if(ct===0){fb.textContent='Add items to your cart first!';fb.style.color='var(--ink3)';payBtn.disabled=true;return}
+  if(wt<ct){fb.textContent='Need ₹'+(ct-wt)+' more!';fb.style.color='var(--orange)';payBtn.disabled=true}
+  else if(wt===ct){fb.textContent='🎉 Exact change! Perfect!';fb.style.color='var(--ok)';payBtn.disabled=false}
+  else{fb.textContent='You have ₹'+(wt-ct)+' extra.';fb.style.color='var(--teal)';payBtn.disabled=false}
+}
+
+/* ── PAY ── */
+function payNow(){
+  var ct=cartTotal(),wt=walletTotal();
+  if(ct===0||wt<ct)return;
+  // Build receipt
+  var rcItems=document.getElementById('rcItems');rcItems.innerHTML='';
+  Object.keys(cart).filter(function(k){return cart[k]>0}).forEach(function(k){
+    var item=ITEMS[k],qty=cart[k];
+    var row=document.createElement('div');row.className='rc-item-row';
+    row.innerHTML='<span>'+item.e+' '+item.n+(qty>1?' ×'+qty:'')+'</span><span>₹'+(item.p*qty)+'</span>';
+    rcItems.appendChild(row);
+  });
+  document.getElementById('rcTotal').textContent=ct;
+  spawnConfetti();
+  document.getElementById('successOverlay').style.display='flex';
+}
+
+function closeSuccess(){
+  document.getElementById('successOverlay').style.display='none';
+  cart={};walletCoins=[];
+  bldShelf();renderWallet();renderCart();renderProgress();
+  document.getElementById('shopFb').textContent='';
+}
+
+var CONFETTI_COLS=['#D97706','#16A34A','#2563EB','#DC2626','#7C3AED','#DB2777'];
+function spawnConfetti(){
+  var ca=document.getElementById('confettiArea');ca.innerHTML='';
+  for(var i=0;i<32;i++){
+    var c=document.createElement('div');var sz=5+Math.random()*8;
+    c.style.cssText='position:absolute;width:'+sz+'px;height:'+(sz*1.6)+'px;border-radius:2px;background:'+CONFETTI_COLS[Math.floor(Math.random()*CONFETTI_COLS.length)]+';left:'+Math.random()*100+'%;top:-10px;animation:cfall '+(1.2+Math.random()*1.2)+'s linear '+(Math.random()*.5)+'s forwards;opacity:.9';
+    ca.appendChild(c);
+  }
+  if(!document.getElementById('cfKF')){var st=document.createElement('style');st.id='cfKF';st.textContent='@keyframes cfall{to{transform:translateY(500px) rotate(540deg);opacity:0}}';document.head.appendChild(st)}
+}
+
+/* ── PRACTICE ── */
+function pool4(ans,lo,hi){var s=new Set([ans]);var i=0;while(s.size<4&&i<50){i++;var w=ans+Math.round(Math.random()*8-4);if(w>=lo&&w<=hi&&w!==ans)s.add(w)}return[...s].sort(function(){return Math.random()-.5})}
+function mkOpts(cid,items,correct,fid){var c=document.getElementById(cid);c.innerHTML='';items.forEach(function(n){var b=document.createElement('button');b.className='opt';b.textContent='₹'+n;b.onclick=function(){c.querySelectorAll('.opt').forEach(function(x){x.onclick=null});var fb=document.getElementById(fid);if(String(n)===String(correct)){b.classList.add('ok');fb.textContent='🎉 Correct!';fb.style.color='var(--ok)'}else{b.classList.add('no');fb.textContent='The answer is ₹'+correct+'.';fb.style.color='var(--no)';c.querySelectorAll('.opt').forEach(function(x){if(String(x.textContent)==='₹'+String(correct))x.classList.add('ok')})}};c.appendChild(b)})}
+
+var pTgt=0;
+function nwPQ(){
+  var amounts=[3,5,7,10,12,15,20];pTgt=amounts[Math.floor(Math.random()*amounts.length)];
+  document.getElementById('pTgt').textContent=pTgt;
+  mkOpts('pPal',pool4(pTgt,1,30),pTgt,'pFb');
+  document.getElementById('pFb').textContent='';
+  // q2: add two coin values
+  var a=COINS[Math.floor(Math.random()*4)],b=COINS[Math.floor(Math.random()*4)];
+  var tot2=a.v+b.v;
+  document.getElementById('q2txt').textContent='You have a '+a.l+' coin and a '+b.l+' coin. Total?';
+  mkOpts('p2Pal',pool4(tot2,2,30),tot2,'p2Fb');
+  document.getElementById('p2Fb').textContent='';
+}
+
+/* ── LEARN: show coins ── */
+function bldLearn(){
+  var lc=document.getElementById('learnCoins'),ln=document.getElementById('learnNotes');
+  lc.innerHTML='';ln.innerHTML='';
+  COINS.forEach(function(coin){
+    var wrap=document.createElement('div');wrap.style.cssText='display:flex;flex-direction:column;align-items:center;gap:4px';
+    var el=mkCoinEl(coin,function(){});el.style.cursor='default';el.onmouseenter=el.onmouseleave=null;
+    var lbl=document.createElement('div');lbl.style.cssText='font-size:10px;font-weight:800;color:var(--ink3)';lbl.textContent=coin.l;
+    wrap.appendChild(el);wrap.appendChild(lbl);
+    (coin.note?ln:lc).appendChild(wrap);
+  });
+}
+
+bldLearn();bldShelf();bldPal();renderCart();renderWallet();renderProgress();nwPQ();
+sw('learn');
 
 </script>
 </body>
