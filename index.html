@@ -3,127 +3,30 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>💰 Money — Grade 8</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,800;9..40,900&family=DM+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<title>Chapter 12 · Money</title>
+<link href="https://fonts.googleapis.com/css2?family=Grandstander:wght@500;600;700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg1:#fddcb5;--bg2:#dff2e0;
-  --card:#fff;--border:#1a1a2e;
-  --ink:#1a1a2e;--ink2:#4a4a5a;--ink3:#9090a0;
-  --teal:#4ecdc4;--orange:#ff6b35;--yellow:#ffd93d;--red:#e63946;--purple:#a78bfa;--green:#2a9d8f;
-  --sans:'DM Sans',system-ui,sans-serif;--mono:'DM Mono',monospace;
-}
-html{background:linear-gradient(135deg,var(--bg1) 0%,#fef6e8 50%,var(--bg2) 100%);min-height:100vh}
-body{font-family:var(--sans);color:var(--ink);min-height:100vh;padding:32px 24px;display:flex;flex-direction:column;align-items:center}
-
-/* PAGE CARD */
-.page-card{background:var(--card);border:2px solid var(--border);border-radius:24px;width:100%;max-width:960px;overflow:hidden}
-
-/* HEADER */
-.card-header{padding:28px 36px 22px}
-.activity-pill{display:inline-flex;align-items:center;gap:6px;background:var(--yellow);border:2px solid var(--border);border-radius:30px;padding:4px 14px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
-.activity-pill::before{content:'★';font-size:10px}
-.page-title{font-size:clamp(24px,4vw,40px);font-weight:900;line-height:1.05;display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
-.t-pill{color:#fff;border:2px solid var(--border);border-radius:12px;padding:3px 16px;font-style:italic;font-size:inherit;display:inline-block}
-.page-desc{font-size:15px;color:var(--ink2);line-height:1.6;max-width:600px}
-.page-desc em{color:var(--red);font-style:italic;font-weight:700}
-
-/* BODY LAYOUTS */
-.two-col{display:grid;grid-template-columns:1fr 280px;border-top:1px dashed #d0d0d8}
-.two-col-wide{display:grid;grid-template-columns:1fr 320px;border-top:1px dashed #d0d0d8}
-.one-col{border-top:1px dashed #d0d0d8}
-.left-col{padding:24px 28px;border-right:1px dashed #d0d0d8;display:flex;flex-direction:column;gap:20px}
-.right-col{padding:20px 18px;display:flex;flex-direction:column;gap:14px}
-.full-col{padding:24px 28px;display:flex;flex-direction:column;gap:20px}
-
-/* SECTION LABELS */
-.sec{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-.sec-dot{width:13px;height:13px;border-radius:50%;flex-shrink:0}
-.sec-title{font-size:14px;font-weight:800;color:var(--ink)}
-.sec-rule{flex:1;border:none;border-top:1px dashed #d8d8e0}
-
-/* INFO CARDS (right col) */
-.info-card{background:#fff;border:2px solid var(--border);border-radius:18px;padding:14px 16px}
-.info-card + .info-card{margin-top:0}
-
-/* CONTROLS — sliders */
-.ctrl-block{display:flex;flex-direction:column;gap:5px}
-.ctrl-head{display:flex;justify-content:space-between;align-items:baseline}
-.ctrl-lbl{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--ink3)}
-.ctrl-val{font-family:var(--mono);font-size:24px;font-weight:700}
-input[type=range]{-webkit-appearance:none;width:100%;height:5px;border-radius:3px;background:#e8e8e8;outline:none;cursor:pointer}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;cursor:pointer;border:2px solid var(--border)}
-
-/* TABS / SCENARIO BUTTONS */
-.tab-row{display:flex;gap:8px;flex-wrap:wrap;padding:16px 28px;border-bottom:1px dashed #d0d0d8;background:#fafafa}
-.tab-btn{padding:8px 18px;border:2px solid #d0d0d8;border-radius:30px;background:#fff;font-family:var(--sans);font-size:13px;font-weight:700;color:var(--ink2);cursor:pointer;transition:all .14s}
-.tab-btn:hover{border-color:var(--teal);color:var(--teal)}
-.tab-btn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
-.tab-btn.active-orange{background:var(--orange);color:#fff;border-color:var(--orange)}
-
-/* STEP NAV */
-.step-nav{display:flex;align-items:center;gap:12px;padding:14px 28px;border-bottom:1px dashed #d0d0d8;background:#fafafa}
-.step-btn{padding:8px 20px;border:2px solid var(--border);border-radius:30px;font-family:var(--sans);font-size:13px;font-weight:800;cursor:pointer;background:#fff;color:var(--ink2);transition:all .14s}
-.step-btn:hover:not(:disabled){background:#f5f5f5}
-.step-btn:disabled{opacity:.35;cursor:default}
-.step-btn.primary{background:var(--teal);color:#fff;border-color:var(--teal)}
-.step-btn.primary:hover{background:#3ab5ac}
-.step-dots{display:flex;gap:6px}
-.sdot{width:9px;height:9px;border-radius:50%;background:#d8d8e0;transition:all .15s}
-.sdot.done{background:var(--teal)}
-.sdot.cur{background:var(--teal);transform:scale(1.3)}
-.step-lbl{flex:1;font-size:14px;font-weight:700;color:var(--ink)}
-
-/* STEP BANNER */
-.step-banner{padding:14px 28px;background:#fffbe6;border-bottom:1px dashed #d0d0d8;display:flex;align-items:baseline;gap:10px}
-.step-num{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--orange);flex-shrink:0}
-.step-text{font-size:15px;font-weight:700;color:var(--ink);line-height:1.4}
-
-/* CANVAS AREA */
-.canvas-wrap{background:#2d2d44;border-radius:0;overflow:hidden;position:relative}
-canvas{display:block;width:100%;height:auto}
-
-/* FACT / STATS ROWS */
-.fact-row{display:flex;justify-content:space-between;align-items:baseline;padding:7px 0;border-bottom:1px dashed #e8e8e8}
-.fact-row:last-child{border-bottom:none}
-.fact-lbl{font-size:13px;color:var(--ink2)}
-.fact-val{font-family:var(--mono);font-size:16px;font-weight:700}
-
-/* TALLY BUTTONS */
-.tally{display:flex;align-items:center;gap:8px}
-.tally-btn{width:36px;height:36px;border:2px solid var(--border);border-radius:10px;background:#fff;font-size:18px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .12s;color:var(--ink2)}
-.tally-btn:hover{background:var(--teal);color:#fff;border-color:var(--teal)}
-.tally-num{font-family:var(--mono);font-size:28px;font-weight:700;min-width:40px;text-align:center}
-
-/* VERDICT STRIP */
-.verdict-strip{padding:14px 28px;font-size:15px;font-weight:700;border-top:1px dashed #d0d0d8}
-.verdict-ok{background:#e8faf9;color:var(--green)}
-.verdict-fail{background:#fef0ee;color:#c0441e}
-
-/* INSIGHT STRIP */
-.insight-strip{padding:16px 28px;font-size:14px;color:var(--ink2);line-height:1.7;background:#fffbe6;border-top:1px dashed #d0d0d8}
-.insight-strip strong{color:var(--ink);font-weight:700}
-
-/* NUMBER CIRCLES */
-.num-circle{width:26px;height:26px;border-radius:50%;background:var(--yellow);border:2px solid var(--border);display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0}
-
-/* FLOATING SHAPES */
-.shape{position:fixed;pointer-events:none;z-index:-1}
-.sh-circle{width:56px;height:56px;border-radius:50%;background:#ff6b6b;opacity:.65;top:80px;left:calc(50% - 530px)}
-.sh-tri{width:0;height:0;border-left:22px solid transparent;border-right:22px solid transparent;border-bottom:38px solid #4ecdc4;opacity:.65;bottom:180px;right:calc(50% - 530px)}
-.sh-star{font-size:34px;line-height:1;opacity:.55;top:200px;right:calc(50% - 510px)}
-.sh-sq{width:36px;height:36px;border-radius:8px;background:#a78bfa;opacity:.55;bottom:90px;left:calc(50% - 510px);transform:rotate(15deg)}
-
-@media(max-width:740px){
-  body{padding:12px}
-  .two-col,.two-col-wide{grid-template-columns:1fr}
-  .left-col{border-right:none;border-bottom:1px dashed #d0d0d8}
-  .card-header,.full-col,.left-col,.right-col{padding-left:18px;padding-right:18px}
-  .tab-row,.step-nav,.step-banner,.verdict-strip,.insight-strip{padding-left:18px;padding-right:18px}
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--ac:#16A34A;--bg:#FDF6EE;--card:#fff;--ink:#1A2E2E;--ink2:#5F7A7A;--ok:#16A34A;--no:#DC2626;--r:20px;
+  --teal:#0891B2;--orange:#D97706;--yellow:#CA8A04;--red:#DC2626;--purple:#7C3AED;--green:#16A34A;
+  --ink3:#9090a0;--border:#1A2E2E;}
+html,body{width:100%;min-height:100vh;font-family:'Poppins',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+.hdr{width:100%;position:sticky;top:0;z-index:100;background:var(--ac);box-shadow:0 4px 24px rgba(0,0,0,.15)}
+.hdr-in{max-width:720px;margin:0 auto;padding:14px 20px 0;text-align:center}
+.ch-n{font-family:'Grandstander',cursive;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.65)}
+.ch-t{font-family:'Grandstander',cursive;font-size:clamp(18px,5vw,26px);font-weight:900;color:#fff;line-height:1.2;margin:2px 0 10px;text-shadow:0 2px 8px rgba(0,0,0,.1)}
+.tabs{display:flex;gap:4px;max-width:320px;margin:0 auto;background:rgba(0,0,0,.1);border-radius:14px 14px 0 0;padding:4px 4px 0}
+.tab{flex:1;padding:9px 0;text-align:center;font-family:'Grandstander',cursive;font-size:13px;font-weight:800;cursor:pointer;border-radius:12px 12px 0 0;color:rgba(255,255,255,.6);transition:.2s;user-select:none}
+.tab.on{background:var(--bg);color:var(--ac)}
+.tab:not(.on):hover{color:#fff;background:rgba(255,255,255,.08)}
+.page{max-width:720px;margin:0 auto;padding:14px 14px 60px}
+.pnl{display:none;flex-direction:column;gap:16px}.pnl.on{display:flex}
+.card{background:var(--card);border-radius:var(--r);padding:20px 18px;box-shadow:0 3px 16px rgba(0,0,0,.06);position:relative;overflow:hidden}
+.cb{position:absolute;top:0;left:0;bottom:0;width:5px;border-radius:var(--r) 0 0 var(--r);background:var(--ac)}
+.ct{font-family:'Grandstander',cursive;font-size:15px;font-weight:800;padding-left:14px;margin-bottom:3px;line-height:1.3}
+.cs{font-size:12px;color:var(--ink2);padding-left:14px;margin-bottom:14px;line-height:1.6}
+.nbtn{font-family:'Grandstander',cursive;font-size:14px;font-weight:800;padding:10px 24px;border-radius:14px;border:none;background:var(--ac);color:#fff;cursor:pointer;margin-top:12px;box-shadow:0 3px 10px rgba(0,0,0,.12);transition:.15s}
+.nbtn:hover{transform:translateY(-1px);opacity:.9}
 /* LEARN */
 .coin-section-lbl{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--ink3);margin-bottom:8px}
 .coin-row-flex{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;padding:12px;background:#f8f8f8;border-radius:12px;border:1.5px solid #e0e0e0}
@@ -213,22 +116,22 @@ canvas{display:block;width:100%;height:auto}
 }
 
 .page-card{max-width:960px}
+
 </style>
 </head>
 <body>
-<div class="shape sh-circle"></div>
-<div class="shape sh-tri"></div>
-<div class="shape sh-star">★</div>
-<div class="shape sh-sq"></div>
-<div class="page-card">
-  <div class="card-header">
-    <div class="activity-pill">Ch 12 · Grade 2 · Money</div>
-    <div class="page-title">💰 <span class="t-pill" style="background:var(--orange)">Money</span></div>
-    <p class="page-desc">Learn Indian coins and notes. Add <em>multiple items</em> to your cart and pay for them all at once!</p>
+<div class="hdr"><div class="hdr-in">
+  <div class="ch-n">Chapter 12</div>
+  <div class="ch-t">Money</div>
+  <div class="tabs">
+    <div class="tab on" id="tab-learn" onclick="sw('learn')">📚 Learn</div>
+    <div class="tab" id="tab-shop" onclick="sw('shop')">🛒 Shop</div>
+    <div class="tab" id="tab-practice" onclick="sw('practice')">⭐ Practice</div>
   </div>
+</div></div>
+<div class="page">
 
-  <!-- SUCCESS OVERLAY -->
-  <div id="successOverlay">
+<div id="successOverlay">
     <div class="receipt-card">
       <div id="confettiArea"></div>
       <div class="rc-title">🎉 Purchase complete!</div>
@@ -238,15 +141,10 @@ canvas{display:block;width:100%;height:auto}
     </div>
   </div>
 
-  <!-- TABS -->
-  <div class="tab-row">
-    <button class="tab-btn on" data-tab="learn" onclick="sw('learn')">📚 Learn</button>
-    <button class="tab-btn" data-tab="shop" onclick="sw('shop')">🛒 Shop</button>
-    <button class="tab-btn" data-tab="practice" onclick="sw('practice')">⭐ Practice</button>
-  </div>
-
-  <!-- LEARN -->
-  <div id="p-learn" style="padding:16px 20px;display:flex;flex-direction:column;gap:14px">
+<div class="pnl on" id="p-learn">
+  <div class="card"><div class="cb"></div>
+    <div class="ct">Indian Coins and Notes</div>
+    <div class="cs">Tap any coin or note to learn its value.</div>
     <div>
       <div class="coin-section-lbl">Coins</div>
       <div class="coin-row-flex" id="learnCoins"></div>
@@ -263,10 +161,11 @@ canvas{display:block;width:100%;height:auto}
       </div>
     </div>
   </div>
+  </div>
+</div>
 
-  <!-- SHOP (multi-item cart) -->
-  <div id="p-shop" style="display:none">
-    <div class="shop-layout">
+<div class="pnl" id="p-shop">
+  <div class="shop-layout">
       <div class="shop-left">
         <div>
           <div class="sec-lbl">🏪 Tap items to add to cart</div>
@@ -320,11 +219,14 @@ canvas{display:block;width:100%;height:auto}
       </div>
     </div>
   </div>
+</div>
 
-  <!-- PRACTICE -->
-  <div id="p-practice" style="display:none;padding:16px 20px;flex-direction:column;gap:0">
+<div class="pnl" id="p-practice">
+  <div class="card"><div class="cb"></div>
+    <div class="ct">Money practice</div>
+    <div class="cs">Work out the totals and choose the right answer.</div>
     <div class="q-card">
-      <div class="q-lbl">Make exactly ₹<span id="pTgt"></span> using the coins below:</div>
+      <div class="q-lbl" id="q1lbl">Make exactly ₹<span id="pTgt"></span> using the coins below:</div>
       <div class="opts" id="pPal"></div>
       <div class="fb" id="pFb"></div>
     </div>
@@ -334,19 +236,23 @@ canvas{display:block;width:100%;height:auto}
       <div class="fb" id="p2Fb"></div>
     </div>
   </div>
+</div>
 
 </div>
 <script>
-
 function sw(n){
   ['learn','shop','practice'].forEach(function(id){
     var p=document.getElementById('p-'+id);
-    p.style.display=id===n?'':'none';
+    p.classList.toggle('on',id===n);
+    p.style.display=id===n?'flex':'none';
   });
-  document.querySelectorAll('.tab-btn').forEach(function(t){
-    t.classList.toggle('on', t.dataset.tab===n);
+  document.querySelectorAll('.tab').forEach(function(t){
+    t.classList.toggle('on', t.id==='tab-'+n);
   });
 }
+
+
+
 
 /* ── COINS & ITEMS ── */
 var COINS=[
@@ -496,7 +402,7 @@ function renderProgress(){
   var payBtn=document.getElementById('payBtn');
   if(ct===0){fb.textContent='Add items to your cart first!';fb.style.color='var(--ink3)';payBtn.disabled=true;return}
   if(wt<ct){fb.textContent='Need ₹'+(ct-wt)+' more!';fb.style.color='var(--orange)';payBtn.disabled=true}
-  else if(wt===ct){fb.textContent='🎉 Exact change! Perfect!';fb.style.color='var(--ok)';payBtn.disabled=false}
+  else if(wt===ct){fb.textContent='🎉 Exact amount! Perfect!';fb.style.color='var(--ok)';payBtn.disabled=false}
   else{fb.textContent='You have ₹'+(wt-ct)+' extra.';fb.style.color='var(--teal)';payBtn.disabled=false}
 }
 
@@ -541,15 +447,35 @@ function mkOpts(cid,items,correct,fid){var c=document.getElementById(cid);c.inne
 
 var pTgt=0;
 function nwPQ(){
-  var amounts=[3,5,7,10,12,15,20];pTgt=amounts[Math.floor(Math.random()*amounts.length)];
+  /* Q1: add two coin values — pick different coins */
+  var c1=COINS[Math.floor(Math.random()*5)];
+  var c2;do{c2=COINS[Math.floor(Math.random()*5)]}while(c2===c1);
+  pTgt=c1.v+c2.v;
   document.getElementById('pTgt').textContent=pTgt;
-  mkOpts('pPal',pool4(pTgt,1,30),pTgt,'pFb');
+  /* Build 4 distinct options — ensure no out-of-range blanks */
+  var opts=new Set([pTgt]);var tried=0;
+  var allVals=[1,2,5,10,20,50];
+  while(opts.size<4&&tried<80){tried++;
+    var aa=allVals[Math.floor(Math.random()*allVals.length)];
+    var bb=allVals[Math.floor(Math.random()*allVals.length)];
+    var w=aa+bb;if(w!==pTgt&&w>=2&&w<=60)opts.add(w);
+  }
+  var optsArr=[...opts].sort(function(){return Math.random()-.5});
+  /* Update Q1 label */
+  document.getElementById('pTgt').textContent=pTgt;
+  document.getElementById('q1lbl').textContent='You have a '+c1.l+' and a '+c2.l+'. What is the total?';
+  mkOpts('pPal',optsArr,pTgt,'pFb');
   document.getElementById('pFb').textContent='';
-  // q2: add two coin values
-  var a=COINS[Math.floor(Math.random()*4)],b=COINS[Math.floor(Math.random()*4)];
-  var tot2=a.v+b.v;
-  document.getElementById('q2txt').textContent='You have a '+a.l+' coin and a '+b.l+' coin. Total?';
-  mkOpts('p2Pal',pool4(tot2,2,30),tot2,'p2Fb');
+  /* Q2: subtract — you spent some, how much left? */
+  var wallet=COINS[Math.floor(Math.random()*4)];
+  var spent=COINS[Math.floor(Math.random()*3)];
+  var left=wallet.v-spent.v;
+  if(left<=0){wallet=COINS[3];spent=COINS[1];left=wallet.v-spent.v;}
+  var tot2=left;
+  document.getElementById('q2txt').textContent='You have '+wallet.l+'. You spend '+spent.l+'. How much is left?';
+  var opts2=new Set([tot2]);var t2=0;
+  while(opts2.size<4&&t2<60){t2++;var ww=tot2+[-2,-1,1,2,3][Math.floor(Math.random()*5)];if(ww>0&&ww<=50&&ww!==tot2)opts2.add(ww);}
+  mkOpts('p2Pal',[...opts2].sort(function(){return Math.random()-.5}),tot2,'p2Fb');
   document.getElementById('p2Fb').textContent='';
 }
 
@@ -568,6 +494,7 @@ function bldLearn(){
 
 bldLearn();bldShelf();bldPal();renderCart();renderWallet();renderProgress();nwPQ();
 sw('learn');
+
 
 </script>
 </body>
